@@ -1,0 +1,24 @@
+%h1 Listing all forums
+
+- @categories.each do |category|
+  %h2
+    = category.name
+    Category
+  %table{:border => "1"}
+    %tr
+      %th
+        Name
+      %th
+        Last post
+
+    - category.forums.each do |forum|
+      %tr
+        %td
+          = link_to forum.name, forum
+        %td
+          - last_post = forum.topics.last.posts.last
+          = time_ago_in_words ( last_post.created_at )
+          ago on
+          = link_to last_post.topic.name, '/forums/topics/' + last_post.topic.id
+          by
+          = last_post.user.forum_display_name

@@ -1,0 +1,26 @@
+%h1 Viewing Forum "#{@forum.name}"
+= link_to "Add a topic"
+%br
+%br
+%h2 Topics:
+%table{:border => "1"}
+  %tr
+    %th
+      Name
+    %th
+      Creator
+    %th
+      Last post
+
+  - @topics.each do |topic|
+    %tr
+      %td
+        = link_to topic.name, '/forums/topics/' + topic.id
+      %td
+        = topic.user.forum_display_name
+        = time_ago_in_words( topic.created_at )
+        ago
+      %td
+        = topic.posts.last.user.forum_display_name
+        = time_ago_in_words( topic.posts.last.created_at )
+        ago

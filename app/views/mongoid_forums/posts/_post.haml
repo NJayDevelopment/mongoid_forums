@@ -1,0 +1,16 @@
+%br
+= post.user.forum_display_name
+- if post.reply_to_id
+  replied to
+  = MongoidForums::Post.find(post.reply_to_id).user.forum_display_name
+- else
+  created
+= time_ago_in_words(post.created_at)
+ago
+%br
+- if post.reply_to_id
+  >
+  = MongoidForums::Post.find(post.reply_to_id).text
+  %br
+= post.text
+%br
