@@ -19,7 +19,8 @@ Gem::Specification.new do |s|
   s.add_dependency "rails", "~> 4.2.0"
   s.add_dependency 'mongoid', "4.0.0"
   s.add_dependency 'devise', "3.4.1"
-  
+  s.add_dependency 'simple_form'
+
   s.add_development_dependency "haml"
   s.add_development_dependency "pry-rails"
 end

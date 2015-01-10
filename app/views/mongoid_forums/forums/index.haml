@@ -19,6 +19,6 @@
           - last_post = forum.topics.last.posts.last
           = time_ago_in_words ( last_post.created_at )
           ago on
-          = link_to last_post.topic.name, '/topics/' + last_post.topic.id
+          = link_to last_post.topic.name, last_post.topic
           by
           = last_post.user.forum_display_name

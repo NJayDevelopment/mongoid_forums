@@ -26,9 +26,11 @@ module MongoidForums
       @topic = Topic.new
       @topic.name = topic_params[:name]
       @topic.user = current_user.id
-      puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-      puts @topic.attributes
-      puts @forum.name
+      @topic.forum = @forum.id
+      @post = Post.new
+      @post.user = current_user.id
+      @post.text = topic_params[:posts][:text]
+      @topic.posts << @post
 
       if @topic.save && @topic.posts.first.save
         flash[:notice] = "Topic created successfully"
@@ -42,7 +44,7 @@ module MongoidForums
   private
 
   def topic_params
-    params.require(:topic).permit(:name)
+    params.require(:topic).permit(:name, :posts => [:text])
   end
 
 

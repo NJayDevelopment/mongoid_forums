@@ -5,6 +5,7 @@ PATH
       devise (= 3.4.1)
       mongoid (= 4.0.0)
       rails (~> 4.2.0)
+      simple_form
 
 GEM
   remote: https://rubygems.org/
@@ -124,6 +125,9 @@ GEM
     rake (10.4.2)
     responders (2.0.2)
       railties (>= 4.2.0.alpha, < 5)
+    simple_form (3.0.3)
+      actionpack (~> 4.0)
+      activemodel (~> 4.0)
     slop (3.6.0)
     sprockets (2.12.3)
       hike (~> 1.2)
