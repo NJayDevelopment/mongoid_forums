@@ -1,2 +1,5 @@
 %h1 Viewing Topic "#{@topic.name}"
+= link_to "Reply to topic", new_topic_post_path(@topic)
+%br
+%br
 = render @posts

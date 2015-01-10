@@ -17,8 +17,6 @@ module MongoidForums
       @forum = Forum.find(params[:forum_id])
       @topic = Topic.new
       @topic.forum = @forum.id
-
-      puts "dkjhfkshfkjsdhflkdshfklsjdhkflhjdslkjhfaklsdjhflkasdjhflkjasdhflkhasdoiufhpawh4oiy348yiHOHFOSDHLKFJHSDKLJFHSKLDJFHSLDKFHJLSKDFJHSLDKFJHSDLKFHJDSKLFHJSLKD"
     end
 
     def create
@@ -46,7 +44,6 @@ module MongoidForums
   def topic_params
     params.require(:topic).permit(:name, :posts => [:text])
   end
-
 
 
   end

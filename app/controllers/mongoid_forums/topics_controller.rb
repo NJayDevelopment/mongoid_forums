@@ -7,12 +7,6 @@ module MongoidForums
       @posts = @topic.posts.sort_by {|post| post.created_at}
     end
 
-    def new
-    end
-
-    def create
-    end
-
     def update
     end
 
