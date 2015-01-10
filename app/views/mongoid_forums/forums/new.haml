@@ -1,0 +1,15 @@
+%h3
+  New Topic in
+  = @forum.category.name
+  Category
+
+= simple_form_for @topic, :url => forum_create_path do |f|
+  = f.label :name
+  = f.text_field :name
+  %br
+  %br
+  = f.label :post
+  = f.simple_fields_for :posts do |post|
+    = render :partial => "mongoid_forums/posts/form", :locals => { :f => post }
+  %br
+  = f.submit "Create Topic", :class => "btn", :disable_with => "Creating..."

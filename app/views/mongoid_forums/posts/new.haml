@@ -1,0 +1,17 @@
+%h1 New Post
+- if params[:reply_to_id]
+  - replying_to = MongoidForums::Post.find(params[:reply_to_id])
+  Replying to
+  = replying_to.user.forum_display_name
+  %br
+  >
+  = replying_to.text
+  %br
+  %br
+  
+= form_for ([@topic, @post]) do |f|
+  = f.label :text
+  %br
+  = render :partial => "form", :locals => { :f => f }
+  %br
+  = f.submit "Create Reply", :class => "btn", :disable_with => "Creating..."

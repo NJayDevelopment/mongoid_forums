@@ -1,0 +1,4 @@
+= f.text_area :text
+%br
+- if params[:reply_to_id]
+  = f.hidden_field :reply_to_id, :value => params[:reply_to_id]
