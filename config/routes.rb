@@ -1,21 +1,19 @@
 MongoidForums::Engine.routes.draw do
   root :to => "forums#index"
 
-  resources :categories, :only => [:index, :show]
+  resources :forums, :path => "/" do
+    get 'new'
+    post 'create'
+  end
 
-  resources :forums do
-    resources :topics
+  resources :topics, :path => "/topics" do
+    resources :posts
+    member do
+      get :subscribe
+      get :unsubscribe
+    end
   end
 
   resources :categories
 
-  resources :forums, :only => [:index, :show], :path => "/" do
-    resources :topics do
-      resources :posts
-      member do
-        post :subscribe
-        post :unsubscribe
-      end
-    end
-  end
 end

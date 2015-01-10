@@ -1,5 +1,5 @@
 %h1 Viewing Forum "#{@forum.name}"
-= link_to "Add a topic"
+= link_to "Add a topic", forum_path(@forum) + '/new'
 %br
 %br
 %h2 Topics:
@@ -15,7 +15,7 @@
   - @topics.each do |topic|
     %tr
       %td
-        = link_to topic.name, '/forums/topics/' + topic.id
+        = link_to topic.name, topic
       %td
         = topic.user.forum_display_name
         = time_ago_in_words( topic.created_at )

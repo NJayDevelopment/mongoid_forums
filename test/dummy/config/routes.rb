@@ -4,5 +4,5 @@ Rails.application.routes.draw do
 
   root to: "welcome#index"
 
-  mount MongoidForums::Engine => "/"
+  mount MongoidForums::Engine => "/forums"
 end
