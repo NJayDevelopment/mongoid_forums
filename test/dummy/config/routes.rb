@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  devise_for :users
+  get 'welcome/index'
 
-  mount MongoidForums::Engine => "/mongoid_forums"
+  root to: "welcome#index"
+
+  mount MongoidForums::Engine => "/forums"
 end

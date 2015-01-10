@@ -1,4 +1,5 @@
 require "mongoid"
+require 'devise'
 
 module MongoidForums
   class Engine < ::Rails::Engine

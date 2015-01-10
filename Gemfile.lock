@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     mongoid_forums (0.0.1)
+      devise (= 3.4.1)
       mongoid (= 4.0.0)
       rails (~> 4.2.0)
 
@@ -44,12 +45,22 @@ GEM
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     arel (6.0.0)
+    bcrypt (3.1.9)
     bson (2.3.0)
     builder (3.2.2)
     connection_pool (2.1.0)
+    devise (3.4.1)
+      bcrypt (~> 3.0)
+      orm_adapter (~> 0.1)
+      railties (>= 3.2.6, < 5)
+      responders
+      thread_safe (~> 0.1)
+      warden (~> 1.2.3)
     erubis (2.7.0)
     globalid (0.3.0)
       activesupport (>= 4.1.0)
+    haml (4.0.6)
+      tilt
     hike (1.2.3)
     i18n (0.7.0)
     json (1.8.2)
@@ -74,6 +85,7 @@ GEM
       mini_portile (~> 0.6.0)
     optionable (0.2.0)
     origin (2.1.1)
+    orm_adapter (0.5.0)
     rack (1.6.0)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -102,6 +114,8 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (10.4.2)
+    responders (2.0.2)
+      railties (>= 4.2.0.alpha, < 5)
     sprockets (2.12.3)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -116,9 +130,12 @@ GEM
     tilt (1.4.1)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
+    warden (1.2.3)
+      rack (>= 1.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  haml
   mongoid_forums!
