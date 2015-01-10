@@ -2,7 +2,7 @@ module MongoidForums
   class Category
     include Mongoid::Document
 
-    has_many :forums
+    has_many :forums, :class_name => "MongoidForums::Forum"
 
 
     field :name
