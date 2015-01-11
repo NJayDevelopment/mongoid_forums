@@ -8,6 +8,7 @@ MongoidForums::Engine.routes.draw do
 
   root :to => "forums#index"
 
+  # this moves the creation of topics into /forum_id/new
   resources :forums, :path => "/" do
     get 'new'
     post 'create'
