@@ -4,18 +4,21 @@ module MongoidForums
     def initialize(user)
       allow "mongoid_forums/admin/forums", [:new]
       allow "mongoid_forums/forums", [:index, :show]
-      allow "mongoid_forums/topics", [:show]
+
+      allow "mongoid_forums/topics", [:show] do |topic|
+        (topic.hidden && topic.user_id == user.id) || !topic.hidden
+      end
 
       if user.present?
         allow "mongoid_forums/posts", [:new, :create]
         allow "mongoid_forums/forums", [:new, :create]
 
         allow "mongoid_forums/topics", [:edit, :update] do |topic|
-          topic.user_id == user.id
+          topic.user_id == user.id && !topic.locked && !topic.hidden
         end
 
         allow "mongoid_forums/posts", [:edit, :update] do |post|
-          post.user_id == user.id
+          post.user_id == user.id && !post.topic.locked
         end
 
         #allow_param :topic, [:name, posts: :text]

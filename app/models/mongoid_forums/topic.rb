@@ -10,5 +10,9 @@ module MongoidForums
 
     field :name
     validates :name, :presence => true
+
+    field :locked, type: Boolean, default: false
+    field :pinned, type: Boolean, default: false
+    field :hidden, type: Boolean, default: false
   end
 end

@@ -23,6 +23,11 @@ module MongoidForums
       end
 
 
+      if @post.topic.locked
+        flash[:alert] = "You may not post on a locked topic"
+        redirect_to @post.topic
+        return
+      end
 
       if @post.save
         flash[:notice] = "Reply created successfully"

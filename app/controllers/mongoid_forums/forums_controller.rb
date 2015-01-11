@@ -8,7 +8,8 @@ module MongoidForums
 
     def show
       @forum = Forum.find(params[:id])
-      @topics = @forum.topics.sort_by {|forum| forum.created_at}
+      @topics = @forum.topics.sort_by {|topic| topic.created_at}.select {|topic| !topic.pinned }.reverse!
+      @stickied =  @forum.topics.sort_by {|topic| topic.created_at}.select {|topic| topic.pinned }.reverse!
     end
 
     # Note: This is not an action to make a new Forum!
