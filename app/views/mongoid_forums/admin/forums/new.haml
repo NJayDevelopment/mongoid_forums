@@ -1,0 +1,4 @@
+= simple_form_for [:admin, @forum] do |f|
+  = f.input :name
+  = f.input :category, collection: MongoidForums::Category.all
+  = f.submit "Create Forum", :class => "btn", :disable_with => "Creating..."
