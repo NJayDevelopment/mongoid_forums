@@ -31,6 +31,15 @@ module MongoidForums
     end
 
     def update
+      @post = current_resource
+
+      if @post.update_attributes(post_params)
+        flash[:notice] = "Reply updated successfully"
+        redirect_to current_resource.topic
+      else
+        flash[:notice] = "Reply could not be updated"
+        render :action => "edit"
+      end
     end
 
     def destroy
@@ -38,9 +47,12 @@ module MongoidForums
 
     private
 
+    def current_resource
+      @current_resource ||= Post.find(params[:id]) if params[:id]
+    end
+
     def post_params
-      params.require(:post).permit(:text).permit(:reply_to_id)
-      params.require(:topic_id)
+      params.require(:post).permit(:text, :reply_to_id)
     end
 
 

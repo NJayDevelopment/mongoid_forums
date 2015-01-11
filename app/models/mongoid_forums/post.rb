@@ -13,7 +13,7 @@ module MongoidForums
                        :foreign_key => "reply_to_id",
                        :dependent   => :nullify
 
-    field :text
+    field :text, type: String
     validates :text, :presence => true
 
   end

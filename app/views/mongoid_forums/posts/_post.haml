@@ -1,4 +1,3 @@
-%br
 = post.user.forum_display_name
 - if post.reply_to_id
   replied to
@@ -9,10 +8,13 @@
 ago
 
 = link_to 'Quote', new_topic_post_path(post.topic_id, :reply_to_id => post.id)
+- if allow? "mongoid_forums/posts", :edit, post
+  = link_to "Edit", edit_topic_post_path(post.topic_id, post)
+
 %br
 - if post.reply_to_id
-  >
-  = MongoidForums::Post.find(post.reply_to_id).text
+  = render :partial => 'mongoid_forums/posts/quoted', :locals => {:post => post}
   %br
 = post.text
 %br
+%hr

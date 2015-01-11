@@ -1,0 +1,17 @@
+%h1 Edit Post
+- if @current_resource[:reply_to_id]
+  - replying_to = MongoidForums::Post.find(@current_resource[:reply_to_id])
+  This post is a reply to
+  = replying_to.user.forum_display_name
+  %br
+  >
+  = replying_to.text
+  %br
+  %br
+
+= form_for ([@current_resource.topic, @current_resource]) do |f|
+  = f.label :text
+  %br
+  = render :partial => "form", :locals => { :f => f }
+  %br
+  = f.submit "Update post", :class => "btn", :disable_with => "Updating..."

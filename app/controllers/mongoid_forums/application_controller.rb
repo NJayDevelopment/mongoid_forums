@@ -4,11 +4,11 @@ module MongoidForums
 
     before_filter :authorize
 
-    delegate :allow_param?, to: :current_permission
+    delegate :allow?, to: :current_permission
     helper_method :allow?
 
-    delegate :allow_param?, to: :current_permission
-    helper_method :allow?
+    #delegate :allow_param?, to: :current_permission
+    #helper_method :allow?
 
     private
 
