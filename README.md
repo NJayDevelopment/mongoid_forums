@@ -10,9 +10,11 @@ https://github.com/kultus/forem-2
 
 
 TODO:
-- [ ] Permissions system
-- [ ] Sticky
+- [X] Permissions system
+- [X] Sticky
+- [X] Hidden
+- [X] Pinned
 - [ ] Archiving
 - [ ] Subscribing to topics + getting alerts
-- [ ] Moderating topics (removing, editing, hiding)
-- [ ] Category/Forum/Topic/Post visibility level
+- [ ] Moderating topics (removing, editing, hiding). Users can edit their own posts/topics as of right now.
+- [ ] Category/Forum/Topic/Post visibility level. Don't know if this is really needed.
