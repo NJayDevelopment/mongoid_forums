@@ -15,6 +15,15 @@ module MongoidForums
       @post.topic = params[:topic_id]
       @post.user = current_user.id
       @post.reply_to_id = params[:post][:reply_to_id]
+
+      if @post.reply_to_id && @post.reply_to_id == @post.topic.posts.first.id
+        flash[:alert] = "You may not quote the original post"
+        redirect_to @post.topic
+        return
+      end
+
+
+
       if @post.save
         flash[:notice] = "Reply created successfully"
         redirect_to @post.topic
