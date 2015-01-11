@@ -1,3 +1,8 @@
 = MongoidForums
 
-This project rocks and uses MIT-LICENSE.
+TODO:
+[ ] Sticky
+[ ] Archiving
+[ ] Subscribing to topics + getting alerts
+[ ] Moderating topics (removing, editing, hiding)
+[ ] Category/Forum/Topic/Post visibility level
