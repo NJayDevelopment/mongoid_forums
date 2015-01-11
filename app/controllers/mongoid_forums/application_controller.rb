@@ -4,9 +4,11 @@ module MongoidForums
 
     before_filter :authorize
 
-    delegate :allow?, to: :current_permission
+    delegate :allow_param?, to: :current_permission
     helper_method :allow?
 
+    delegate :allow_param?, to: :current_permission
+    helper_method :allow?
 
     private
 
@@ -25,7 +27,9 @@ module MongoidForums
 
 
     def authorize
-      unless current_permission.allow? params[:controller], params[:action], current_resource
+      if current_permission.allow? params[:controller], params[:action], current_resource
+        #current_permission.permit_params! params
+      else
         redirect_to root_path, alert: "Not authorized"
       end
     end
