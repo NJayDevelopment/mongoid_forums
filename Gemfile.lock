@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    mongoid_forums (0.0.1)
+    mongoid-forums (0.0.1)
       devise (= 3.4.1)
       mongoid (= 4.0.0)
       rails (~> 4.2.0)
@@ -151,5 +151,5 @@ PLATFORMS
 
 DEPENDENCIES
   haml
-  mongoid_forums!
+  mongoid-forums!
   pry-rails

@@ -5,7 +5,7 @@ require "mongoid_forums/version"
 
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
-  s.name        = "mongoid_forums"
+  s.name        = "mongoid-forums"
   s.version     = MongoidForums::VERSION
   s.authors     = ["skipperguy12"]
   s.email       = ["skipperguy12@users.noreply.github.com"]

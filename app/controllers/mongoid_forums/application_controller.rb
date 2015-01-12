@@ -1,6 +1,7 @@
 module MongoidForums
   class ApplicationController < ActionController::Base
     before_action :set_categories
+    before_action :set_alerts
 
     before_filter :authorize
 
@@ -11,6 +12,10 @@ module MongoidForums
     #helper_method :allow?
 
     private
+
+    def set_alerts
+      @alerts = MongoidForums::Alert.where(:user_id => current_user.id, :read => false).desc(:updated_at).limit(25)
+    end
 
     def set_categories
       @categories = Category.all

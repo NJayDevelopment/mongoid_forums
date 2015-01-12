@@ -1,5 +1,7 @@
 %h1 Viewing Topic "#{@topic.name}"
 = link_to "Reply to topic", new_topic_post_path(@topic)
+- if allow? "mongoid_forums/topics", :edit, @topic
+  = link_to "Edit topic", edit_topic_path(@topic)
 %br
 %br
 = render @posts

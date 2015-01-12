@@ -18,7 +18,7 @@ module MongoidForums
         end
 
         allow "mongoid_forums/posts", [:edit, :update] do |post|
-          post.user_id == user.id && !post.topic.locked
+              post.user_id == user.id && !post.topic.locked
         end
 
         #allow_param :topic, [:name, posts: :text]

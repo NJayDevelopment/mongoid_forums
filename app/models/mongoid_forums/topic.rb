@@ -2,6 +2,9 @@ module MongoidForums
   class Topic
     include Mongoid::Document
     include Mongoid::Timestamps
+    include MongoidForums::Concerns::Subscribable
+
+    after_create :subscribe_creator
 
     belongs_to :forum, :class_name => "MongoidForums::Forum"
     has_many :posts, :class_name => "MongoidForums::Post"

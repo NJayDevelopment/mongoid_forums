@@ -30,6 +30,7 @@ module MongoidForums
       end
 
       if @post.save
+        @post.topic.alert_subscribers(current_user.id)
         flash[:notice] = "Reply created successfully"
         redirect_to @post.topic
       else
