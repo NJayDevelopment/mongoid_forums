@@ -1,6 +1,5 @@
 %h2 Your subscriptions
-- unless @topics.class.name == "Array"
-  = paginate @topics
+= paginate @topics
 
 - @topics.each do |sub|
   = render partial: 'topic', :locals => {:topic => sub.subscribable}

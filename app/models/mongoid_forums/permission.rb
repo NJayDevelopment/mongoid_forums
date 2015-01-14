@@ -14,7 +14,7 @@ module MongoidForums
         allow "mongoid_forums/forums", [:new, :create]
         allow "mongoid_forums/redirect", [:forum, :topic, :posts, :subscriptions]
 
-        allow "mongoid_forums/topics", [:my_subscriptions]
+        allow "mongoid_forums/topics", [:my_subscriptions, :my_topics, :my_posts]
 
         allow "mongoid_forums/topics", [:edit, :update] do |topic|
           topic.user_id == user.id && !topic.locked && !topic.hidden

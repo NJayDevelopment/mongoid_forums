@@ -18,6 +18,17 @@ module MongoidForums
     field :text, type: String
     validates :text, :presence => true
 
+    class << self
+      def by_created_at
+        order_by([:created_at, :asc])
+      end
+
+      def by_updated_at
+        order_by([:updated_at, :desc])
+      end
+    end
+
+
     protected
       def set_topic_last_post_at
         self.topic.update_attribute(:last_post_at, self.created_at)

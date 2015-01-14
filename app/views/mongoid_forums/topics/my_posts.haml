@@ -1,0 +1,6 @@
+%h2 Your Posts
+
+= paginate @posts
+
+- @posts.each do |post|
+  = render partial: 'mongoid_forums/posts/post', :locals => {:post => post}

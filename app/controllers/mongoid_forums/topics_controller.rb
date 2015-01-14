@@ -34,16 +34,16 @@ module MongoidForums
 
     def my_subscriptions
         @subscriptions = Subscription.where(:subscriber_id => current_user.id, :subscribable_type => "MongoidForums::Topic", :unsubscribed => false).desc(:updated_at)
-        @topics = @subscriptions.page(params[:page]).all.to_a
+        @topics = @subscriptions.page(params[:page])
         return @topics.sort_by!{:updated_at}
     end
 
     def my_posts
-        @posts = Post.where(:user_id => current_user.id).by_updated_at.page(params[:page]).per(20)
+        @posts = Post.where(:user_id => current_user.id).by_updated_at.page(params[:page])
     end
 
     def my_topics
-        @topics = Topic.where(:user_id => current_user.id).by_most_recent_post.page(params[:page]).per(20)
+        @topics = Topic.where(:user_id => current_user.id).by_most_recent_post.page(params[:page])
     end
 
     private

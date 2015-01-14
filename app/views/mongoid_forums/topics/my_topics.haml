@@ -1,0 +1,6 @@
+%h2 Your Topics
+
+= paginate @topics
+
+- @topics.each do |topic|
+  = render partial: 'topic', :locals => {:topic => topic}
