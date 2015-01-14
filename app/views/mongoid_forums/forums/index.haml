@@ -11,7 +11,7 @@
       %th
         Last post
 
-    - category.forums.each do |forum|
+    - category.forums.order_by([:order, :asc]).each do |forum|
       %tr
         %td
           = link_to forum.name, forum

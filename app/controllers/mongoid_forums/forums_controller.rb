@@ -3,7 +3,7 @@ require_dependency "mongoid_forums/application_controller"
 module MongoidForums
   class ForumsController < ApplicationController
     def index
-      @categories = Category.all
+      @categories = Category.all.order_by([:order, :asc])
     end
 
     def show
