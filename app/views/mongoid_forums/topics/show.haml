@@ -3,5 +3,6 @@
 - if allow? "mongoid_forums/topics", :edit, @topic
   = link_to "Edit topic", edit_topic_path(@topic)
 %br
+= paginate @posts
 %br
 = render @posts

@@ -17,5 +17,15 @@ module MongoidForums
     field :locked, type: Boolean, default: false
     field :pinned, type: Boolean, default: false
     field :hidden, type: Boolean, default: false
+
+    class << self
+      def by_most_recent_post
+        order_by([:last_post_at, :desc])
+      end
+
+      def by_pinned_or_most_recent_post
+        order_by([:pinned, :desc], [:last_post_at, :desc])
+      end
+    end
   end
 end

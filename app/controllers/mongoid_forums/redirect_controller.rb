@@ -22,8 +22,7 @@ module MongoidForums
             x = i
             break if p.id == post.id
         end
-        return redirect_to topic_url(post.topic, :page => (0) + 1) + "#" + post.id.to_s
-        # TODO: add pagination
+        return redirect_to topic_url(post.topic, :page => (x / MongoidForums.per_page) + 1) + "#" + post.id.to_s
     end
 
     def subscriptions

@@ -4,10 +4,14 @@ module MongoidForums
   class TopicsController < ApplicationController
     def show
       @topic = current_resource
-      @posts = @topic.posts.sort_by {|post| post.created_at}
+
+      @posts = @topic.posts.order_by([:created_at, :asc])
+      @posts = @posts.page(params[:page]).per(MongoidForums.per_page)
+
       if current_user.present?
         Alert.where(:user_id => current_user.id).update_all(:read => true)
       end
+
     end
 
     def update

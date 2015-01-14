@@ -3,6 +3,8 @@ module MongoidForums
     include Mongoid::Document
     include Mongoid::Timestamps
 
+    before_save :set_topic_last_post_at
+
     belongs_to :topic, :class_name => "MongoidForums::Topic"
 
     belongs_to :user, :class_name => "::User"
@@ -16,5 +18,9 @@ module MongoidForums
     field :text, type: String
     validates :text, :presence => true
 
-  end
+    protected
+      def set_topic_last_post_at
+        self.topic.update_attribute(:last_post_at, self.created_at)
+      end
+    end
 end
