@@ -3,8 +3,9 @@ PATH
   specs:
     mongoid-forums (0.0.1)
       devise (= 3.4.1)
-      kaminari
+      kaminari (= 0.15.1)
       mongoid (= 4.0.0)
+      mongoid-pagination
       rails (~> 4.2.0)
       simple_form
 
@@ -67,7 +68,7 @@ GEM
     hike (1.2.3)
     i18n (0.7.0)
     json (1.8.2)
-    kaminari (0.16.1)
+    kaminari (0.15.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     loofah (2.0.1)
@@ -83,6 +84,9 @@ GEM
       moped (~> 2.0.0)
       origin (~> 2.1)
       tzinfo (>= 0.3.37)
+    mongoid-pagination (0.2.0)
+      activesupport
+      mongoid
     moped (2.0.3)
       bson (~> 2.2)
       connection_pool (~> 2.0)
@@ -129,7 +133,7 @@ GEM
     rake (10.4.2)
     responders (2.0.2)
       railties (>= 4.2.0.alpha, < 5)
-    simple_form (3.0.3)
+    simple_form (3.1.0)
       actionpack (~> 4.0)
       activemodel (~> 4.0)
     slop (3.6.0)
