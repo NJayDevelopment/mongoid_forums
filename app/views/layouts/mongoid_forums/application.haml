@@ -10,7 +10,7 @@
       = al.mongoid_forums_topic_replier
       replied to
       - topic = MongoidForums::Post.find(al.mongoid_forums_topic_post_id).topic
-      = link_to topic.name, topic
+      = link_to topic.name, al.link
       = time_ago_in_words(al.created_at)
       ago
 

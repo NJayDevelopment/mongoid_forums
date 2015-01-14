@@ -22,6 +22,12 @@ MongoidForums::Engine.routes.draw do
     end
   end
 
+  # REDIRECT OLD ROUTES
+  get '/forums/:forum_id/', :to => "redirect#forum"
+  get '/forums/:forum_id/topics/:topic_id', :to => "redirect#topic"
+  get '/posts/:post_id', :to => "redirect#posts"
+  get '/subscriptions', :to => "redirect#subscriptions"
+  
   resources :categories
 
 end
