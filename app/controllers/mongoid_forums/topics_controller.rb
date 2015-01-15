@@ -5,15 +5,17 @@ module MongoidForums
     before_filter :find_forum, :except => [:my_subscriptions, :my_posts, :my_topics]
 
     def show
-      @topic = current_resource
+      if find_topic
+        register_view
+        @topic = current_resource
 
-      @posts = @topic.posts.order_by([:created_at, :asc])
-      @posts = @posts.page(params[:page]).per(MongoidForums.per_page)
+        @posts = @topic.posts.order_by([:created_at, :asc])
+        @posts = @posts.page(params[:page]).per(MongoidForums.per_page)
 
-      if current_user.present?
-        Alert.where(:user_id => current_user.id).update_all(:read => true)
+        if current_user.present?
+          Alert.where(:user_id => current_user.id).update_all(:read => true)
+        end
       end
-
     end
 
     def destroy
@@ -65,6 +67,10 @@ module MongoidForums
         flash.alert = t("forem.topic.not_found")
         redirect_to @forum and return
       end
+    end
+
+    def register_view
+      @topic.register_view_by(current_user)
     end
 
     def current_resource

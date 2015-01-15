@@ -8,6 +8,8 @@ module MongoidForums
 
     def show
       @forum = Forum.find(params[:id])
+      register_view
+      
       @topics = @forum.topics
       @topics = @topics.by_pinned_or_most_recent_post.page(params[:page]).per(MongoidForums.per_page)
     end
@@ -41,6 +43,10 @@ module MongoidForums
     end
 
   private
+
+  def register_view
+    @forum.register_view_by(current_user)
+  end
 
   def topic_params
     params.require(:topic).permit(:name, :posts => [:text])

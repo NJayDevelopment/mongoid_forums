@@ -11,7 +11,8 @@
       Creator
     %th
       Last post
-
+    %th
+      Views
 
   - @topics.each do |topic|
     - if allow? "mongoid_forums/topics", :show, topic
@@ -30,3 +31,5 @@
           = topic.posts.last.user.forum_display_name
           = time_ago_in_words( topic.posts.last.created_at )
           ago
+        %td
+          = topic.views_count ? topic.views_count : "None"

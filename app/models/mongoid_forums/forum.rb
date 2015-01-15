@@ -1,6 +1,7 @@
 module MongoidForums
   class Forum
     include Mongoid::Document
+    include MongoidForums::Concerns::Viewable
 
     belongs_to :category, :class_name => "MongoidForums::Category"
     has_many :topics, :class_name => "MongoidForums::Topic"

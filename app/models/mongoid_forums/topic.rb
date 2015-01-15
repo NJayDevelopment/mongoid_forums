@@ -3,6 +3,7 @@ module MongoidForums
     include Mongoid::Document
     include Mongoid::Timestamps
     include MongoidForums::Concerns::Subscribable
+    include MongoidForums::Concerns::Viewable
 
     after_create :subscribe_creator
 

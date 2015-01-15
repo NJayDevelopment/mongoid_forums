@@ -10,6 +10,8 @@
         Name
       %th
         Last post
+      %th
+        Views
 
     - category.forums.order_by([:order, :asc]).each do |forum|
       %tr
@@ -25,3 +27,5 @@
             = last_post.user.forum_display_name
           - else
             No posts yet
+        %td
+          = forum.views_count ? forum.views_count : "None"
