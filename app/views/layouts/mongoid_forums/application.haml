@@ -6,13 +6,14 @@
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   %body
-    - @alerts.each do |al|
-      = al.mongoid_forums_topic_replier
-      replied to
-      - topic = MongoidForums::Post.find(al.mongoid_forums_topic_post_id).topic
-      = link_to topic.name, al.link
-      = time_ago_in_words(al.created_at)
-      ago
+    - if current_user.present?
+      - @alerts.each do |al|
+        = al.mongoid_forums_topic_replier
+        replied to
+        - topic = MongoidForums::Post.find(al.mongoid_forums_topic_post_id).topic
+        = link_to topic.name, al.link
+        = time_ago_in_words(al.created_at)
+        ago
 
     - flash.each do |name, msg|
       = content_tag :p, msg if msg.is_a?(String)

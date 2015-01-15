@@ -14,7 +14,9 @@ module MongoidForums
     private
 
     def set_alerts
-      @alerts = MongoidForums::Alert.where(:user_id => current_user.id, :read => false).desc(:updated_at).limit(25)
+      if current_user.present?
+        @alerts = MongoidForums::Alert.where(:user_id => current_user.id, :read => false).desc(:updated_at).limit(25)
+      end
     end
 
     def set_categories
