@@ -13,7 +13,7 @@ module MongoidForums
       @post = Post.new
       @post.text = params[:post][:text]
       @post.topic = params[:topic_id]
-      @post.user = current_user.id
+      @post.user = mongoid_forums_user.id
       @post.reply_to_id = params[:post][:reply_to_id]
 
       if @post.reply_to_id && @post.reply_to_id == @post.topic.posts.first.id
@@ -30,7 +30,7 @@ module MongoidForums
       end
 
       if @post.save
-        @post.topic.alert_subscribers(current_user.id)
+        @post.topic.alert_subscribers(mongoid_forums_user.id)
         flash[:notice] = "Reply created successfully"
         redirect_to @post.topic
       else

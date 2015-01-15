@@ -12,8 +12,8 @@ module MongoidForums
         @posts = @topic.posts.order_by([:created_at, :asc])
         @posts = @posts.page(params[:page]).per(MongoidForums.per_page)
 
-        if current_user.present?
-          Alert.where(:user_id => current_user.id).update_all(:read => true)
+        if mongoid_forums_user.present?
+          Alert.where(:user_id => mongoid_forums_user.id).update_all(:read => true)
         end
       end
     end
@@ -22,22 +22,22 @@ module MongoidForums
     end
 
     def my_subscriptions
-        @subscriptions = Subscription.where(:subscriber_id => current_user.id, :subscribable_type => "MongoidForums::Topic", :unsubscribed => false).desc(:updated_at)
+        @subscriptions = Subscription.where(:subscriber_id => mongoid_forums_user.id, :subscribable_type => "MongoidForums::Topic", :unsubscribed => false).desc(:updated_at)
         @topics = @subscriptions.page(params[:page])
         return @topics.sort_by!{:updated_at}
     end
 
     def my_posts
-        @posts = Post.where(:user_id => current_user.id).by_updated_at.page(params[:page])
+        @posts = Post.where(:user_id => mongoid_forums_user.id).by_updated_at.page(params[:page])
     end
 
     def my_topics
-        @topics = Topic.where(:user_id => current_user.id).by_most_recent_post.page(params[:page])
+        @topics = Topic.where(:user_id => mongoid_forums_user.id).by_most_recent_post.page(params[:page])
     end
 
     def subscribe
       if find_topic
-        @topic.subscribe_user(current_user.id)
+        @topic.subscribe_user(mongoid_forums_user.id)
         flash[:notice] = "Successfully subscribed to topic"
         redirect_to topic_url(@topic)
       end
@@ -45,7 +45,7 @@ module MongoidForums
 
     def unsubscribe
       if find_topic
-        @topic.unsubscribe_user(current_user.id)
+        @topic.unsubscribe_user(mongoid_forums_user.id)
         flash[:notice] = "Successfully unsubscribed to topic"
         redirect_to topic_url(@topic)
       end
@@ -70,7 +70,7 @@ module MongoidForums
     end
 
     def register_view
-      @topic.register_view_by(current_user)
+      @topic.register_view_by(mongoid_forums_user)
     end
 
     def current_resource

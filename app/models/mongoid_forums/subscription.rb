@@ -6,7 +6,7 @@ module MongoidForums
     field :unsubscribed, :type => Boolean, :default => false
 
     belongs_to :subscribable, :polymorphic => true, :index => true
-    belongs_to :subscriber, :class_name => "::User", :index => true
+    belongs_to :subscriber, :class_name => MongoidForums.user_class.to_s, :index => true
 
     validates :subscriber_id, :presence => true
     validates :subscribable_id,   :presence => true

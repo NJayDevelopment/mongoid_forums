@@ -6,7 +6,7 @@
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   %body
-    - if current_user.present?
+    - if mongoid_forums_user.present?
       - @alerts.each do |al|
         = al.mongoid_forums_topic_replier
         replied to
