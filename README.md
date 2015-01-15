@@ -19,5 +19,6 @@ TODO:
 - [X] Pinned
 - [ ] Archiving
 - [X] Subscribing to topics + getting alerts
-- [ ] Moderating topics (removing, editing, hiding). Users can edit their own posts/topics as of right now.
+- [ ] Mass moderation (here users can mass moderate their own posts and hide their topics, and a moderator can hide OTHER user's topics and posts
+- [ ] More admin panel controls (changing forum names, changing categories, etc)
 - [ ] Category/Forum/Topic/Post visibility level. 
