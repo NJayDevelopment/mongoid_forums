@@ -12,6 +12,8 @@
     %th
       Last post
     %th
+      Posts
+    %th
       Views
 
   - @topics.each do |topic|
@@ -31,5 +33,7 @@
           = topic.posts.last.user.forum_display_name
           = time_ago_in_words( topic.posts.last.created_at )
           ago
+        %td
+          = topic.posts.count
         %td
           = topic.views_count ? topic.views_count : "None"
