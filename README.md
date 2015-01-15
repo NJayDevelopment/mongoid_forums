@@ -19,6 +19,8 @@ TODO:
 - [X] Pinned
 - [ ] Archiving
 - [X] Subscribing to topics + getting alerts
+- [ ] Generator to easily setup mongoid_forums, also to not depend on a model specifically named User
 - [ ] Mass moderation (here users can mass moderate their own posts and hide their topics, and a moderator can hide OTHER user's topics and posts
 - [ ] More admin panel controls (changing forum names, changing categories, etc)
+- [ ] Option to have to approve topics/posts manually
 - [ ] Category/Forum/Topic/Post visibility level. 
