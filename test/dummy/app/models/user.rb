@@ -7,12 +7,6 @@ class User
 
   include ZeroOidFix
 
-
-  ### METHODS THAT MONGOID_FORUMS WILL EXPECT YOU TO HAVE. ###
-  def forum_display_name
-    email
-  end
-
   ## Database authenticatable
   field :email,              type: String, default: ""
   field :encrypted_password, type: String, default: ""

@@ -3,6 +3,11 @@ class ApplicationController < ActionController::Base
   def mongoid_forums_user
     current_user
   end
+  helper_method :mongoid_forums_user
+
+  def mongoid_forums_user
+    current_user
+  end
 
   helper_method :mongoid_forums_user
 
