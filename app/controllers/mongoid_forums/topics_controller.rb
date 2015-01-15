@@ -2,6 +2,8 @@ require_dependency "mongoid_forums/application_controller"
 
 module MongoidForums
   class TopicsController < ApplicationController
+    before_filter :find_forum, :except => [:my_subscriptions, :my_posts, :my_topics]
+
     def show
       @topic = current_resource
 
@@ -12,21 +14,6 @@ module MongoidForums
         Alert.where(:user_id => current_user.id).update_all(:read => true)
       end
 
-    end
-
-    def update
-      @topic = current_resource
-      if @topic.update_attributes(topic_params)
-        flash[:notice] = "Topic updated successfully"
-        redirect_to current_resource
-      else
-        flash[:alert] = "Topic could not be updated"
-        render :action => :edit
-      end
-    end
-
-    def edit
-      @topic = current_resource
     end
 
     def destroy
@@ -46,7 +33,39 @@ module MongoidForums
         @topics = Topic.where(:user_id => current_user.id).by_most_recent_post.page(params[:page])
     end
 
+    def subscribe
+      if find_topic
+        @topic.subscribe_user(current_user.id)
+        flash[:notice] = "Successfully subscribed to topic"
+        redirect_to topic_url(@topic)
+      end
+    end
+
+    def unsubscribe
+      if find_topic
+        @topic.unsubscribe_user(current_user.id)
+        flash[:notice] = "Successfully unsubscribed to topic"
+        redirect_to topic_url(@topic)
+      end
+    end
+
     private
+
+    def find_forum
+      @forum = Topic.find(params[:id]).forum
+      allow? "mongoid_forums/forums", :show, @forum
+    end
+
+    def find_topic
+      begin
+        scope = @forum.topics # TODO: pending review stuff
+        @topic = scope.find(params[:id])
+        allow? "mongoid_forums/topics", :show, @topic
+      rescue Mongoid::Errors::DocumentNotFound
+        flash.alert = t("forem.topic.not_found")
+        redirect_to @forum and return
+      end
+    end
 
     def current_resource
       @current_resource ||= Topic.find(params[:id]) if params[:id]
