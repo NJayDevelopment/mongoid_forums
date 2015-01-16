@@ -9,7 +9,7 @@ module MongoidForums
     def show
       @forum = Forum.find(params[:id])
       register_view
-      
+
       @topics = @forum.topics
       @topics = @topics.by_pinned_or_most_recent_post.page(params[:page]).per(MongoidForums.per_page)
     end
@@ -26,10 +26,10 @@ module MongoidForums
       @forum = Forum.find(params[:forum_id])
       @topic = Topic.new
       @topic.name = topic_params[:name]
-      @topic.user = current_user.id
+      @topic.user = mongoid_forums_user.id
       @topic.forum = @forum.id
       @post = Post.new
-      @post.user = current_user.id
+      @post.user = mongoid_forums_user.id
       @post.text = topic_params[:posts][:text]
       @topic.posts << @post
 
@@ -45,7 +45,7 @@ module MongoidForums
   private
 
   def register_view
-    @forum.register_view_by(current_user)
+    @forum.register_view_by(mongoid_forums_user)
   end
 
   def topic_params

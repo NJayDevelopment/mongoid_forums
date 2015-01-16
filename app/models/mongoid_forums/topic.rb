@@ -10,7 +10,7 @@ module MongoidForums
     belongs_to :forum, :class_name => "MongoidForums::Forum"
     has_many :posts, :class_name => "MongoidForums::Post"
 
-    belongs_to :user, :class_name => "::User"
+    belongs_to :user, :class_name => MongoidForums.user_class.to_s
 
     field :name
     validates :name, :presence => true

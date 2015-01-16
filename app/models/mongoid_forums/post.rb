@@ -7,7 +7,7 @@ module MongoidForums
 
     belongs_to :topic, :class_name => "MongoidForums::Topic"
 
-    belongs_to :user, :class_name => "::User"
+    belongs_to :user, :class_name => MongoidForums.user_class.to_s
 
     belongs_to :reply_to, :class_name => "MongoidForums::Post"
 

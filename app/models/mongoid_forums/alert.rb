@@ -14,7 +14,7 @@ module MongoidForums
 
     # Relations
     belongs_to :subscription, :class_name => "MongoidForums::Subscription"
-    belongs_to :user, :index => true, :class_name => "::User"
+    belongs_to :user, :index => true, :class_name => MongoidForums.user_class.to_s
 
     def link
       str = ""
