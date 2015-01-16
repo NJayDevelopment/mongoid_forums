@@ -19,6 +19,19 @@ module MongoidForums
     field :pinned, type: Boolean, default: false
     field :hidden, type: Boolean, default: false
 
+
+    def unread_post_count(user)
+      view = View.where(:viewable_id => id, :user_id => user.id).first
+      return posts.count unless view.present?
+      count = 0
+      posts.each do |post|
+        if post.created_at > view.current_viewed_at
+          count+=1
+        end
+      end
+      return count
+    end
+
     class << self
       def by_most_recent_post
         order_by([:last_post_at, :desc])

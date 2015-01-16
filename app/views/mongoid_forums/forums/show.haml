@@ -12,6 +12,8 @@
     %th
       Last post
     %th
+      Unread posts
+    %th
       Posts
     %th
       Views
@@ -33,6 +35,8 @@
           = topic.posts.last.user.forum_display_name
           = time_ago_in_words( topic.posts.last.created_at )
           ago
+        %td
+          = topic.unread_post_count(mongoid_forums_user)
         %td
           = topic.posts.count
         %td
