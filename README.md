@@ -57,8 +57,8 @@ TODO:
 - [X] Views tracking
 - [X] Subscribing to topics + getting alerts
 - [X] Generator to easily setup mongoid_forums, also to not depend on a model specifically named User
+- [X] Ability to obtain how many posts a user has not read for a topic and how many topics a user has not seen for a forum
 - [ ] Archiving
-- [ ] Ability to obtain how many posts a user has not read for a topic and how many topics a user has not seen for a forum
 - [ ] Mass moderation (here users can mass moderate their own posts and hide their topics, and a moderator can hide OTHER user's topics and posts
 - [ ] More admin panel controls (changing forum names, changing categories, etc)
 - [ ] Option to have to approve topics/posts manually
