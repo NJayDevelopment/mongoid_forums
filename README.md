@@ -2,7 +2,44 @@
 
 A forum system for Rails 4 and Mongoid. 
 
-MongoidForums will work as long as you're using a User model to represent your user (named exactly "User", this is an issue and we are working towards adding generators to allow any User model with any name) and have a helper method current_user to get the current user instance. Additionally it requires you have the method ```forum_display_name``` in your User model (again, later this will be injected into your model automatically using the generator).
+# Installation
+
+```ruby
+gem 'mongoid_forums', :github => "njaydevelopment/mongoid_forums"
+```
+
+And then:
+
+```ruby
+gem 'kaminari', '0.15.1'
+```
+
+## Run the installer
+
+**Ensure that you first of all have a `User` model and some sort of authentication system set up**. We would recommend going with [Devise](http://github.com/plataformatec/devise), but it's up to
+you. All MongoidForums needs is a model to link topics and posts to.
+
+Run the installer and answer any questions that pop up. There's sensible defaults there if you don't want to answer them.
+
+```shell
+rails g mongoid_forums:install
+```
+
+## Set up helper methods in your user model
+
+MongoidForums depends on a `forum_display_name` (which defaults as `to_s`) method being available on your `User` model so that it can display the user's name in posts. Define it in your model like this:
+
+```ruby
+def forum_display_name
+  name
+end
+```
+Or simply return the user's display name as the `to_s` method in your user model.
+
+Please note that if you are using Devise, User model does not have `name` column by default,
+so you either should use custom migration to add it or use another column (`email` for example).
+
+
 
 MongoidForums is not as flexible as Forem, nor does it have all the functionality, but forem does not support Mongoid and thus this project was created. This project aspires to eventually have all the functionality of Forem, along with more features.
 The code for this project intends to remain simple.
@@ -19,9 +56,9 @@ TODO:
 - [X] Pinned
 - [X] Views tracking
 - [X] Subscribing to topics + getting alerts
+- [X] Generator to easily setup mongoid_forums, also to not depend on a model specifically named User
 - [ ] Archiving
 - [ ] Ability to obtain how many posts a user has not read for a topic and how many topics a user has not seen for a forum
-- [ ] Generator to easily setup mongoid_forums, also to not depend on a model specifically named User
 - [ ] Mass moderation (here users can mass moderate their own posts and hide their topics, and a moderator can hide OTHER user's topics and posts
 - [ ] More admin panel controls (changing forum names, changing categories, etc)
 - [ ] Option to have to approve topics/posts manually
