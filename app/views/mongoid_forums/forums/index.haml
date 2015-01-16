@@ -15,6 +15,8 @@
       %th
         Posts
       %th
+        Unread topics
+      %th
         Views
 
     - category.forums.order_by([:order, :asc]).each do |forum|
@@ -35,5 +37,7 @@
           = topics_count(forum) ? topics_count(forum) : "None"
         %td
           = posts_count(forum) ? posts_count(forum) : "None"
+        %td
+          = forum.unread_topic_count(mongoid_forums_user)
         %td
           = forum.views_count ? forum.views_count : "None"

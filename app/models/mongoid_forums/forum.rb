@@ -14,6 +14,18 @@ module MongoidForums
 
     field :order, :type => Integer, :default => 0
 
+    def unread_topic_count(user)
+      view = View.where(:viewable_id => id, :user_id => user.id).first
+      return topics.count unless view.present?
+      count = 0
+      topics.each do |topics|
+        if topics.created_at > view.current_viewed_at
+          count+=1
+        end
+      end
+      return count
+    end
+
     def count_of_posts
       topics.inject(0) {|sum, topic| topic.posts.count + sum }
     end
