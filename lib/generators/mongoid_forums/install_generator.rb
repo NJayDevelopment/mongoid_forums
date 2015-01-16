@@ -25,9 +25,6 @@ module MongoidForums
           @user_class = @user_class
           puts "Class of item set when passed #{@user_class.class}"
         end
-
-        MongoidForums.decorate_user_class!
-        puts "Decorating user class!"
       end
 
 
