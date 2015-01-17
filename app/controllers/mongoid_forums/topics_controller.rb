@@ -28,11 +28,11 @@ module MongoidForums
     end
 
     def my_posts
-        @posts = Post.where(:user_id => mongoid_forums_user.id).by_updated_at.page(params[:page])
+        @posts = Post.where(:user_id => mongoid_forums_user.id).by_updated_at.page(params[:page]).per(MongoidForums.per_page)
     end
 
     def my_topics
-        @topics = Topic.where(:user_id => mongoid_forums_user.id).by_most_recent_post.page(params[:page])
+        @topics = Topic.where(:user_id => mongoid_forums_user.id).by_most_recent_post.page(params[:page]).per(MongoidForums.per_page)
     end
 
     def subscribe
