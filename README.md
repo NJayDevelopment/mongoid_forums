@@ -5,7 +5,7 @@ A forum system for Rails 4 and Mongoid.
 # Installation
 
 ```ruby
-gem 'mongoid_forums', :github => "njaydevelopment/mongoid_forums"
+gem 'mongoid-forums', :github => "njaydevelopment/mongoid_forums"
 ```
 
 And then:
