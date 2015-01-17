@@ -1,4 +1,5 @@
-= MongoidForums
+MongoidForums
+============
 
 A forum system for Rails 4 and Mongoid. 
 
@@ -45,7 +46,8 @@ MongoidForums is not as flexible as Forem, nor does it have all the functionalit
 The code for this project intends to remain simple.
 
 The routes (along with some other designs such as Alerts system) for this project are based around Overcast Network's forum system (https://oc.tc/forums)
-See here for the public version this project is based on:
+
+See here for the public version this project is based on (and borrows some code from):
 https://github.com/kultus/forem-2
 
 
