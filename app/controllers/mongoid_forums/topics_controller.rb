@@ -23,7 +23,7 @@ module MongoidForums
 
     def my_subscriptions
         @subscriptions = Subscription.where(:subscriber_id => mongoid_forums_user.id, :subscribable_type => "MongoidForums::Topic", :unsubscribed => false).desc(:updated_at)
-        @topics = @subscriptions.page(params[:page])
+        @topics = @subscriptions.page(params[:page]).per(MongoidForums.per_page)
         return @topics.sort_by!{:updated_at}
     end
 
