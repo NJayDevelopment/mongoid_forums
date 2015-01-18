@@ -1,7 +1,9 @@
 require "mongoid_forums/engine"
+require 'mongoid_forums/sanitizer'
+require 'sanitize'
 
 module MongoidForums
-  mattr_accessor :per_page, :user_class, :email_from_address
+  mattr_accessor :per_page, :user_class, :formatter, :email_from_address
 
   class << self
     def per_page

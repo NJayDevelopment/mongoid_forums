@@ -15,6 +15,6 @@ ago
 - if post.reply_to_id
   = render :partial => 'mongoid_forums/posts/quoted', :locals => {:post => post}
   %br
-= post.text
+= mongoid_forums_format(post.text)
 %br
 %hr
