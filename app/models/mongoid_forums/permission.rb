@@ -6,7 +6,7 @@ module MongoidForums
       allow "mongoid_forums/forums", [:index, :show]
 
       allow "mongoid_forums/topics", [:show] do |topic|
-        (topic.hidden && topic.user_id == user.id) || !topic.hidden
+        (topic.hidden && user.present? && topic.user_id == user.id) || !topic.hidden
       end
 
       if user.present?
