@@ -10,7 +10,7 @@ module MongoidForums
     end
 
     def as_quoted_text(text)
-      if MongoidForums.formatter && Forem.formatter.respond_to?(:blockquote)
+      if MongoidForums.formatter && MongoidForums.formatter.respond_to?(:blockquote)
         MongoidForums.formatter.blockquote(as_sanitized_text(text)).html_safe
       else
          "<blockquote>#{(h(text))}</blockquote>\n\n".html_safe
@@ -21,7 +21,7 @@ module MongoidForums
       if MongoidForums.formatter.respond_to?(:sanitize)
         MongoidForums.formatter.sanitize(text)
       else
-        Forem::Sanitizer.sanitize(text)
+        MongoidForums::Sanitizer.sanitize(text)
       end
     end
   end
