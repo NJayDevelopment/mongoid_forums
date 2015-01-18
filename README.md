@@ -6,13 +6,7 @@ A forum system for Rails 4 and Mongoid.
 # Installation
 
 ```ruby
-gem 'mongoid-forums', :github => "njaydevelopment/mongoid_forums"
-```
-
-And then:
-
-```ruby
-gem 'kaminari', '0.15.1'
+gem 'mongoid-forums'
 ```
 
 ## Run the installer
