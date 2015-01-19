@@ -11,6 +11,7 @@ module MongoidForums
 
       if user.present?
         allow "mongoid_forums/posts", [:new, :create]
+
         allow "mongoid_forums/forums", [:new, :create]
         allow "mongoid_forums/redirect", [:forum, :topic, :posts, :subscriptions]
 

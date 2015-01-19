@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    mongoid-forums (0.0.1)
+    mongoid-forums (0.0.2)
       devise (= 3.4.1)
       kaminari (= 0.15.1)
       mongoid (= 4.0.0)

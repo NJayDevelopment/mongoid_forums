@@ -26,6 +26,8 @@
             &#128274
           - if topic.hidden
             ⚠
+          - if topic.pinned
+            *
           = link_to topic.name, topic
         %td
           = topic.user.forum_display_name
@@ -36,7 +38,7 @@
           = time_ago_in_words( topic.posts.last.created_at )
           ago
         %td
-          = topic.unread_post_count(mongoid_forums_user)
+          = mongoid_forums_user ? topic.unread_post_count(mongoid_forums_user) : ""
         %td
           = topic.posts.count
         %td

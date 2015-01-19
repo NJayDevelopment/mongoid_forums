@@ -7,7 +7,6 @@ module MongoidForums
     def show
       if find_topic
         register_view
-        @topic = current_resource
 
         @posts = @topic.posts.order_by([:created_at, :asc])
         @posts = @posts.page(params[:page]).per(MongoidForums.per_page)

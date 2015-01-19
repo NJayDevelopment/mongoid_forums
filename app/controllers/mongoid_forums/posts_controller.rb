@@ -2,37 +2,37 @@ require_dependency "mongoid_forums/application_controller"
 
 module MongoidForums
   class PostsController < ApplicationController
+    before_filter :find_topic
+
     def new
-      @topic = Topic.find(params[:topic_id])
-      @post = Post.new
+      @post = @topic.posts.build
       @post.topic = @topic.id
+      if params[:reply_to_id]
+        find_reply_to_post
+      end
     end
 
     def create
+      @post = @topic.posts.build(post_params)
+      @post.user = mongoid_forums_user
 
-      @post = Post.new
-      @post.text = params[:post][:text]
-      @post.topic = params[:topic_id]
-      @post.user = mongoid_forums_user.id
-      @post.reply_to_id = params[:post][:reply_to_id]
-
-      if @post.reply_to_id && @post.reply_to_id == @post.topic.posts.first.id
+      if @post.reply_to_id && @post.reply_to_id == @topic.posts.first.id
         flash[:alert] = "You may not quote the original post"
-        redirect_to @post.topic
+        redirect_to @topic
         return
       end
 
-
-      if @post.topic.locked
+      if @topic.locked
         flash[:alert] = "You may not post on a locked topic"
-        redirect_to @post.topic
+        redirect_to @topic
         return
       end
 
       if @post.save
-        @post.topic.alert_subscribers(mongoid_forums_user.id)
+        @topic.alert_subscribers(mongoid_forums_user.id)
+        @topic.forum.increment_posts_count
         flash[:notice] = "Reply created successfully"
-        redirect_to @post.topic
+        redirect_to @topic
       else
         flash.now.alert = "Reply could not be created"
         render :action => "new"
@@ -43,14 +43,20 @@ module MongoidForums
     end
 
     def edit
+      find_post
     end
 
     def update
-      @post = current_resource
+      if @topic.locked?
+        flash.alert = "You may not update a post on a locked topic!"
+        redirect_to [@topic] and return
+      end
+
+      find_post
 
       if @post.update_attributes(post_params)
         flash[:notice] = "Reply updated successfully"
-        redirect_to current_resource.topic
+        redirect_to @topic
       else
         flash[:notice] = "Reply could not be updated"
         render :action => "edit"
@@ -58,9 +64,42 @@ module MongoidForums
     end
 
     def destroy
+      find_post
+      if @topic.posts.first == @post
+        flash[:alert] = "You may not delete the first post!"
+        redirect_to @topic
+        return
+      end
+
+      if @post.destroy
+        flash[:notice] = "Post deleted successfully"
+        redirect_to @topic
+      else
+        flash[:notice] = "Post could not be deleted"
+        redirect_to @topic
+      end
     end
 
     private
+
+    def destroy_successful
+      if @post.topic.posts.count == 0
+        @post.topic.destroy
+        flash[:notice] = "Post was deleted successfully along with it's topic."
+        redirect_to [@topic.forum]
+      else
+        flash[:notice] = "Post was deleted successfully"
+        redirect_to [@topic.forum, @topic]
+      end
+    end
+
+    def find_post
+      @post = current_resource
+    end
+
+    def find_topic
+      @topic = Topic.find params[:topic_id]
+    end
 
     def current_resource
       @current_resource ||= Post.find(params[:id]) if params[:id]
@@ -70,6 +109,9 @@ module MongoidForums
       params.require(:post).permit(:text, :reply_to_id)
     end
 
+    def find_reply_to_post
+      @reply_to = @topic.posts.find(params[:reply_to_id])
+    end
 
   end
 end

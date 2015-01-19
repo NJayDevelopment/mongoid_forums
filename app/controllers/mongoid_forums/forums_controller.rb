@@ -21,7 +21,9 @@ module MongoidForums
       @topic = Topic.new
       @topic.forum = @forum.id
     end
-
+    
+    # Note: This is not an action to make a new Forum!
+    # it is to create a new TOPIC within a forum
     def create
       @forum = Forum.find(params[:forum_id])
       @topic = Topic.new

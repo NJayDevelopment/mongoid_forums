@@ -38,6 +38,6 @@
         %td
           = posts_count(forum) ? posts_count(forum) : "None"
         %td
-          = forum.unread_topic_count(mongoid_forums_user)
+          = mongoid_forums_user ? forum.unread_topic_count(mongoid_forums_user) : ""
         %td
           = forum.views_count ? forum.views_count : "None"

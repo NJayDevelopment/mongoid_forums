@@ -29,6 +29,7 @@ class MongoidForums::ApplicationController < ApplicationController
     @current_permission ||= MongoidForums::Permission.new(mongoid_forums_user)
   end
 
+  # gets overrided by controllers, and is used in the Rank system
   def current_resource
     nil
   end

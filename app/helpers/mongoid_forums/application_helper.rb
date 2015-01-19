@@ -1,6 +1,6 @@
 module MongoidForums
   module ApplicationHelper
-        include FormattingHelper
+    include FormattingHelper
     # processes text with installed markup formatter
     def mongoid_forums_format(text, *options)
       as_formatted_html(text)
@@ -12,7 +12,7 @@ module MongoidForums
 
     def mongoid_forums_markdown(text, *options)
       #TODO: delete deprecated method
-      Rails.logger.warn("DEPRECATION: forem_markdown is replaced by forem_format() + forem-markdown_formatter gem, and will be removed")
+      Rails.logger.warn("DEPRECATION: mongoid_forums_markdown is replaced by mongoid_forums_format(), and will be removed")
       forem_format(text)
     end
 
