@@ -54,14 +54,12 @@ module MongoidForums
 
     def find_forum
       @forum = Topic.find(params[:id]).forum
-      allow? "mongoid_forums/forums", :show, @forum
     end
 
     def find_topic
       begin
         scope = @forum.topics # TODO: pending review stuff
         @topic = scope.find(params[:id])
-        allow? "mongoid_forums/topics", :show, @topic
       rescue Mongoid::Errors::DocumentNotFound
         flash.alert = t("forem.topic.not_found")
         redirect_to @forum and return

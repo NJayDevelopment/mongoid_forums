@@ -48,7 +48,6 @@ module MongoidForums
       puts alert
       case self.subscribable_type
       when "MongoidForums::Topic"
-        #return if !allow :read, self.subscribable
         if alert == nil
           last_post = self.subscribable.posts.last
           return if last_post.user.id == self.subscriber_id

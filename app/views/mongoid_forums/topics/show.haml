@@ -1,7 +1,7 @@
 %h1 Viewing Topic "#{@topic.name}"
 = link_to "Reply to topic", new_topic_post_path(@topic)
-- if allow? "mongoid_forums/topics", :edit, @topic
-  = link_to "Edit topic", edit_topic_post_path(@topic, @topic.posts.first.id)
+
+= link_to "Edit topic", edit_topic_post_path(@topic, @topic.posts.first.id)
 - if mongoid_forums_user && @topic.subscriber?(mongoid_forums_user.id)
   = link_to "Unsubscribe", unsubscribe_topic_path(@topic)
 -elsif mongoid_forums_user
