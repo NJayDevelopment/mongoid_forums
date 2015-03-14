@@ -12,6 +12,9 @@ module MongoidForums
     field :name
     validates :name, :presence => true
 
+    #has_many :moderators, :through => :moderator_groups, :source => :group
+    has_many :moderator_groups, :class_name => "MongoidForums::ModeratorGroup"
+
     field :order, :type => Integer, :default => 0
 
     def unread_topic_count(user)
@@ -38,5 +41,21 @@ module MongoidForums
       end
       self.save
     end
+
+
+    def moderator?(user)
+     user.mongoid_forums_admin?
+      # user && (user.forem_group_ids & self.moderator_ids).any?
+    end
+
+    def moderators
+      array = Array.new
+      self.moderator_groups.each do |g|
+        array << g.group.members
+      end
+      return array
+    end
+
+
   end
 end
