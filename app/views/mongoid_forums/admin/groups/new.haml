@@ -1,0 +1,4 @@
+// create a new mod group OR create a new group
+= simple_form_for [:admin, @group] do |f|
+  = f.input :name
+  = f.submit "Create Group", :class => "btn", :disable_with => "Creating..."

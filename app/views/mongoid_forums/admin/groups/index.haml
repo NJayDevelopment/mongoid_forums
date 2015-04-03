@@ -1,0 +1,9 @@
+%h1 Manage groups
+%h2 Listing all groups
+- @groups.each_with_index do |group, i|
+  = i
+  \.
+  = link_to group.name, [:admin, group]
+  %br
+%h2 Create a new group
+= link_to "New group", new_admin_group_path

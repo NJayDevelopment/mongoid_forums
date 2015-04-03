@@ -1,0 +1,6 @@
+%h2
+  = @group.name
+%h3 Members
+- @group.members.each_with_index do |member, i|
+  = i
+  = member.mongoid_forum_display_name
