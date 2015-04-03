@@ -1,6 +1,76 @@
 MongoidForums::Engine.routes.draw do
 
   namespace :admin do
+  get 'groups/index'
+  end
+
+  namespace :admin do
+  get 'groups/new'
+  end
+
+  namespace :admin do
+  get 'groups/create'
+  end
+
+  namespace :admin do
+  get 'groups/edit'
+  end
+
+  namespace :admin do
+  get 'groups/update'
+  end
+
+  namespace :admin do
+  get 'groups/show'
+  end
+
+  namespace :admin do
+  get 'groups/destroy'
+  end
+
+  namespace :mongoid_forums do
+  namespace :admin do
+    get 'groups/index'
+    end
+  end
+
+  namespace :mongoid_forums do
+  namespace :admin do
+    get 'groups/new'
+    end
+  end
+
+  namespace :mongoid_forums do
+  namespace :admin do
+    get 'groups/create'
+    end
+  end
+
+  namespace :mongoid_forums do
+  namespace :admin do
+    get 'groups/edit'
+    end
+  end
+
+  namespace :mongoid_forums do
+  namespace :admin do
+    get 'groups/update'
+    end
+  end
+
+  namespace :mongoid_forums do
+  namespace :admin do
+    get 'groups/show'
+    end
+  end
+
+  namespace :mongoid_forums do
+  namespace :admin do
+    get 'groups/destroy'
+    end
+  end
+
+  namespace :admin do
     root :to => 'base#index'
     resources :forums
     resources :categories
