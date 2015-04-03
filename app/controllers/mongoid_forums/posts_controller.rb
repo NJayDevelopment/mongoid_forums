@@ -76,7 +76,12 @@ module MongoidForums
         return
       end
 
-      authorize! :destroy_post, @topic.forum #TODO: Check is user is owner of post
+      authorize! :destroy_post, @topic.forum
+
+      unless @post.owner_or_admin? mongoid_forums_user
+        flash[:alert] = t("mongoid_forums.post.cannot_delete")
+        redirect_to @topic and return
+      end
 
       if @post.destroy
         flash[:notice] = "Post deleted successfully"

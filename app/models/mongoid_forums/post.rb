@@ -28,6 +28,9 @@ module MongoidForums
       end
     end
 
+    def owner_or_admin?(other_user)
+      user == other_user || other_user.mongoid_forums_admin?
+    end
 
     protected
       def set_topic_last_post_at
