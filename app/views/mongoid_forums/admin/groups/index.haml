@@ -1,9 +1,19 @@
 %h1 Manage groups
-%h2 Listing all groups
-- @groups.each_with_index do |group, i|
-  = i
-  \.
-  = link_to group.name, [:admin, group]
-  %br
+
 %h2 Create a new group
 = link_to "New group", new_admin_group_path
+  
+%h2 Listing all groups
+%table{:border => "1"}
+  %tr
+    %th
+      Name
+
+  - @groups.each_with_index do |group, i|
+    %tr
+      %td
+        = link_to group.name, [:admin, group]
+      %td
+        = link_to "Edit", edit_admin_group_path(group)
+      %td
+        = button_to "Destroy", admin_group_path(group), method: :delete, data: { confirm: 'Are you certain you want to delete this?' }

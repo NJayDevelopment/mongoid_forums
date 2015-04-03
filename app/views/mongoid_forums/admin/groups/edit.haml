@@ -1,0 +1,4 @@
+= simple_form_for [:admin, @group] do |f|
+  = f.input :name
+  = f.input :moderator, as: :radio_buttons
+  = f.submit "Update Group", :class => "btn", :disable_with => "Creating..."

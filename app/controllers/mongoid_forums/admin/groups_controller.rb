@@ -28,6 +28,13 @@ module MongoidForums
 
       def update
         @group = Group.find(params[:id])
+        if @group.update_attributes(params.require(:group).permit(:name, :members))
+          flash[:notice] = "Group updated successfully"
+          redirect_to [:admin, @group]
+        else
+          flash[:notice] = "Group could not be updated"
+          render :action => "edit"
+        end
       end
 
       def show
@@ -37,7 +44,15 @@ module MongoidForums
       end
 
       def destroy
-        @group.destroy
+        @group = Group.find(params[:id])
+
+        if @group.destroy
+          flash[:notice] = "Group destroyed successfully"
+          redirect_to admin_groups_path
+        else
+          flash.now.alert = "Group could not be destroyed"
+          redirect_to admin_groups_path
+        end
       end
 
       ### Temporary Methods - Try Not To Cringe Too Much <3 ###
