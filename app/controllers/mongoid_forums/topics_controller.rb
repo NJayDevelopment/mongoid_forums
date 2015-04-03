@@ -18,6 +18,7 @@ module MongoidForums
     end
 
     def destroy
+      
     end
 
     def my_subscriptions

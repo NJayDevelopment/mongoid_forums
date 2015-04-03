@@ -3,8 +3,10 @@ require_dependency "mongoid_forums/application_controller"
 module MongoidForums
   class PostsController < ApplicationController
     before_filter :find_topic
+    before_filter :authenticate_mongoid_forums_user, except: :show
 
     def new
+      authorize! :reply, @topic
       @post = @topic.posts.build
       @post.topic = @topic.id
       if params[:reply_to_id]
@@ -13,6 +15,7 @@ module MongoidForums
     end
 
     def create
+      authorize! :reply, @topic
       @post = @topic.posts.build(post_params)
       @post.user = mongoid_forums_user
 
@@ -44,15 +47,17 @@ module MongoidForums
 
     def edit
       find_post
+      authorize! :edit_post, @topic.forum
     end
 
     def update
-      if @topic.locked?
-        flash.alert = "You may not update a post on a locked topic!"
-        redirect_to [@topic] and return
-      end
+      #if @topic.locked?
+      #  flash.alert = "You may not update a post on a locked topic!"
+      #  redirect_to [@topic] and return
+      #end
 
       find_post
+      authorize! :edit_post, @topic.forum
 
       if @post.update_attributes(post_params)
         flash[:notice] = "Reply updated successfully"
@@ -70,6 +75,8 @@ module MongoidForums
         redirect_to @topic
         return
       end
+
+      authorize! :destroy_post, @topic.forum #TODO: Check is user is owner of post
 
       if @post.destroy
         flash[:notice] = "Post deleted successfully"

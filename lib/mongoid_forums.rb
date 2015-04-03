@@ -1,9 +1,10 @@
 require "mongoid_forums/engine"
 require 'mongoid_forums/sanitizer'
+require 'mongoid_forums/default_permissions'
 require 'sanitize'
 
 module MongoidForums
-  mattr_accessor :per_page, :user_class, :formatter, :email_from_address
+  mattr_accessor :per_page, :user_class, :formatter, :email_from_address, :sign_in_path
 
   class << self
     def per_page
@@ -12,6 +13,7 @@ module MongoidForums
 
     def decorate_user_class!
       MongoidForums.user_class.class_eval do
+        include MongoidForums::DefaultPermissions
 
         has_many :mongoid_forums_posts, :class_name => "MongoidForums::Post", :foreign_key => "user_id"
         has_many :mongoid_forums_topics, :class_name => "MongoidForums::Topic", :foreign_key => "user_id"
