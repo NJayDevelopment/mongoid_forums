@@ -51,10 +51,10 @@ module MongoidForums
     end
 
     def update
-      #if @topic.locked?
-      #  flash.alert = "You may not update a post on a locked topic!"
-      #  redirect_to [@topic] and return
-      #end
+      if @topic.locked?
+        flash.alert = "You may not update a post on a locked topic!"
+        redirect_to [@topic] and return
+      end
 
       find_post
       authorize! :edit_post, @topic.forum
