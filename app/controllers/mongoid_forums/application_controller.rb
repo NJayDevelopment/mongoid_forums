@@ -4,13 +4,12 @@ class MongoidForums::ApplicationController < ApplicationController
   helper MongoidForums::Engine.helpers
 
   rescue_from CanCan::AccessDenied do
-    redirect_to root_path, :alert => t("forem.access_denied")
+    redirect_to root_path, :alert => t("mongoid.access_denied")
   end
 
   def current_ability
-    MongoidForums::Ability.new(forem_user)
+    MongoidForums::Ability.new(mongoid_forums_user)
   end
-
 
   before_action :set_categories
   before_action :set_alerts
@@ -27,7 +26,7 @@ class MongoidForums::ApplicationController < ApplicationController
     @categories = MongoidForums::Category.all
   end
 
-    def authenticate_forem_user
+    def authenticate_mongoid_forums_user
     if !mongoid_forums_user
       session["user_return_to"] = request.fullpath
       flash.alert = "You must be signed in"
@@ -53,6 +52,6 @@ or; 2) Set MongoidForums.sign_in_path to a String value that represents the loca
   def mongoid_forums_admin_or_moderator?(forum)
     mongoid_forums_user && (mongoid_forums_user.mongoid_forums_admin? || forum.moderator?(mongoid_forums_user))
   end
-  helper_method :forem_admin_or_moderator?
+  helper_method :mongoid_forums_admin_or_moderator?
 
 end
