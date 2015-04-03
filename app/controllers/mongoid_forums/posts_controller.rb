@@ -56,10 +56,10 @@ module MongoidForums
         redirect_to [@topic] and return
       end
 
-      find_post
       authorize! :edit_post, @topic.forum
+      find_post
 
-      if @post.update_attributes(post_params)
+      if @post.owner_or_admin?(mongoid_forums_user) && @post.update_attributes(post_params)
         flash[:notice] = "Reply updated successfully"
         redirect_to @topic
       else

@@ -8,8 +8,11 @@
 ago
 
 = link_to 'Quote', new_topic_post_path(post.topic_id, :reply_to_id => post.id)
-= link_to "Edit", edit_topic_post_path(post.topic_id, post)
-= button_to "Delete", topic_post_path(post.topic_id, post), :method => :delete, data: { :confirm => "Are you sure?" }, :class => "btn btn-danger"
+- if post.owner_or_admin?(mongoid_forums_user)
+  - if can?(:edit_post, post.topic.forum)
+    = link_to "Edit", edit_topic_post_path(post.topic_id, post)
+  - if can?(:destroy_post, post.topic.forum)
+    = button_to "Delete", topic_post_path(post.topic_id, post), :method => :delete
 
 
 %br

@@ -20,6 +20,10 @@ module MongoidForums
     field :hidden, type: Boolean, default: false
 
 
+    def can_be_replied_to?
+      !locked?
+    end
+
     def unread_post_count(user)
       view = View.where(:viewable_id => id, :user_id => user.id).first
       return posts.count unless view.present?
