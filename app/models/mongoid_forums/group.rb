@@ -5,6 +5,7 @@ module MongoidForums
     validates :name, :presence => true
 
     field :name, type: String
+    field :moderator, type: Boolean
     field :members, type: Array, default: []
 
     def to_s

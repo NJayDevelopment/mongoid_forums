@@ -13,7 +13,7 @@ module MongoidForums
       end
 
       def create
-        if @group = Group.create(params.require(:group).permit(:name, :members))
+        if @group = Group.create(params.require(:group).permit(:name, :moderator, :members))
           flash[:notice] = "Group created successfully"
           redirect_to [:admin, @group]
         else
@@ -32,6 +32,8 @@ module MongoidForums
 
       def show
         @group = Group.find(params[:id])
+        @group_members = @group.members.map {|member_id| User.find(member_id) }
+        @users = User.all
       end
 
       def destroy
@@ -40,18 +42,23 @@ module MongoidForums
 
       ### Temporary Methods - Try Not To Cringe Too Much <3 ###
       def add_member
-        user = User.find(params.require(:user_id))
+        group = Group.find(params.require(:group_id))
+        user = User.find(params[:user][:id])
 
-        group.members << user.id
+        group.members << user.id unless group.members.include?(user.id)
         group.save
+
+        redirect_to admin_group_path(group)
       end
 
       def remove_member
         group = Group.find(params.require(:group_id))
-        user = User.find(params.require(:user_id))
+        user = User.find(params[:user][:id])
 
         group.members.delete(user.id)
         group.save
+
+        redirect_to admin_group_path(group)
       end
       #########################################################
     end

@@ -1,6 +1,12 @@
 %h2
   = @group.name
 %h3 Members
-- @group.members.each_with_index do |member, i|
+- @group_members.each_with_index do |member, i|
   = i
-  = member.mongoid_forum_display_name
+  = member.forum_display_name
+  %br
+
+= form_tag admin_group_add_user_path(@group), :method => :post do
+  = collection_select(:user, :id, @users, :id, :email, {:prompt => true})
+  %button
+    Add

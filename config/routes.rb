@@ -5,7 +5,10 @@ MongoidForums::Engine.routes.draw do
     root :to => 'base#index'
     resources :forums
     resources :categories
-    resources :groups
+    resources :groups do
+      post '/add_user' => 'groups#add_member', as: :add_user
+      post '/rem_user' => 'groups#remove_member', as: :rem_user
+    end
   end
 
   root :to => "forums#index"

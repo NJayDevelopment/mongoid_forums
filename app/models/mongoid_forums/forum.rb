@@ -12,7 +12,7 @@ module MongoidForums
     field :name
     validates :name, :presence => true
 
-    has_many :moderator_groups, :class_name => "MongoidForums::ModeratorGroup"
+    has_many :moderator_groups, :class_name => "MongoidForums::Group"
 
     field :order, :type => Integer, :default => 0
 
@@ -44,8 +44,8 @@ module MongoidForums
 
     def moderator?(user)
       return false unless user
-      moderator_groups.each do |mod_group|
-        return true if mod_group.group.members.include?(user.id)
+      moderator_groups.each do |group|
+        return true if group.moderator && group.members.include?(user.id)
       end
       false
     end
