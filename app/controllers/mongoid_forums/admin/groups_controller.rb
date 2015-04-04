@@ -39,8 +39,8 @@ module MongoidForums
 
       def show
         @group = Group.find(params[:id])
-        @group_members = @group.members.map {|member_id| User.find(member_id) }
-        @users = User.all
+        @group_members = @group.members.map{|member_id| User.find(member_id) }
+        @users = User.all.select{ |user| !@group.members.include?(user.id) }
       end
 
       def destroy
