@@ -1,0 +1,9 @@
+- @forum.moderator_groups.each do |group|
+  = group.name
+  %br
+
+
+= form_tag admin_forum_add_user_path(@forum), :method => :post do
+  = collection_select(:group, :id, @groups, :id, :name, {:prompt => true})
+  %button
+    Add
