@@ -29,7 +29,7 @@ module MongoidForums
     end
 
     def owner_or_admin?(other_user)
-      user == other_user || other_user.mongoid_forums_admin?
+      user == other_user || (other_user.mongoid_forums_admin? || topic.forum.moderator?(other_user))
     end
 
     protected

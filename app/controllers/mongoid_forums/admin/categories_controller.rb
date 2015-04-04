@@ -3,6 +3,10 @@ require_dependency "mongoid_forums/application_controller"
 module MongoidForums
   module Admin
     class CategoriesController < BaseController
+      def index
+        @forums = Forum.all
+      end
+      
       def new
         @category = Category.new
       end

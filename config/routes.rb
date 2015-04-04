@@ -3,7 +3,10 @@ MongoidForums::Engine.routes.draw do
 
   namespace :admin do
     root :to => 'base#index'
-    resources :forums
+    resources :forums do
+      post '/add_group' => 'forums#add_group', as: :add_user
+      post '/rem_group' => 'forums#remove_group', as: :rem_user
+    end
     resources :categories
     resources :groups do
       post '/add_user' => 'groups#add_member', as: :add_user

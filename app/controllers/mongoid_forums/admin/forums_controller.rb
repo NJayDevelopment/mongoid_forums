@@ -5,6 +5,10 @@ module MongoidForums
     class Admin::ForumsController < BaseController
       before_action :set_forum, only: [:add_group, :remove_group]
 
+      def index
+        @forums = Forum.all
+      end
+
       def new
         @forum = Forum.new
       end
@@ -20,23 +24,41 @@ module MongoidForums
       end
 
       def edit
+        @forum = Forum.find(params[:id])
+        @groups = Group.all.where(moderator: true)
       end
 
       def update
+        @forum = Forum.find(params[:id])
+        if @forum.update(forum_params)
+          flash[:notice] = "Forum updated successfully"
+          redirect_to @forum
+        else
+          flash.now.alert = "Forum could not be updated"
+          render :action => "edit"
+        end
       end
 
       def destroy
+        @forum = Forum.find(params[:id])
+        if @forum.destroy
+          flash[:notice] = "Forum destroyed successfully"
+          redirect_to admin_forums_path
+        else
+          flash.now.alert = "Forum could not be destroyed"
+          render :action => "index"
+        end
       end
 
       ### Temporary Methods - Try Not To Cringe Too Much <3 ###
       def add_group
-        group = Group.find(params.require(:group_id))
+        group = Group.find(params[:group][:id])
         @forum.moderator_groups << group
         @forum.save
       end
 
       def remove_group
-        group = Group.find(params.require(:group_id))
+        group = Group.find(params[:group][:id])
         @forum.moderator_groups.delete(group)
         @forum.save
       end
@@ -44,7 +66,7 @@ module MongoidForums
 
       private
 
-      def category_params
+      def forum_params
         params.require(:forum).permit(:name, :category)
       end
 

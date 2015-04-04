@@ -1,0 +1,9 @@
+= simple_form_for [:admin, @forum] do |f|
+  = f.input :name
+  = f.input :category, collection: MongoidForums::Category.all
+  = f.submit "Update Forum", :class => "btn", :disable_with => "Updating..."
+
+= form_tag admin_forum_add_user_path(@forum), :method => :post do
+  = collection_select(:group, :id, @groups, :id, :name, {:prompt => true})
+  %button
+    Add
