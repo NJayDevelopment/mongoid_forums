@@ -1,6 +1,5 @@
 MongoidForums::Engine.routes.draw do
 
-
   namespace :admin do
     root :to => 'base#index'
     resources :forums do
@@ -41,7 +40,6 @@ MongoidForums::Engine.routes.draw do
       get :unsubscribe
     end
   end
-
 
   resources :categories
 

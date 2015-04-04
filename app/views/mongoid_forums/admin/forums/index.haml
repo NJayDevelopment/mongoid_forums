@@ -14,6 +14,8 @@
       %td
         = link_to forum.name, [:admin, forum]
       %td
+        = link_to "Show", admin_forum_path(forum)
+      %td
         = link_to "Edit", edit_admin_forum_path(forum)
       %td
         = button_to "Destroy", admin_forum_path(forum), method: :delete, data: { confirm: 'Are you certain you want to delete this?' }

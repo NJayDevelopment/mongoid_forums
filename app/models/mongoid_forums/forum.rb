@@ -12,7 +12,7 @@ module MongoidForums
     field :name
     validates :name, :presence => true
 
-    has_many :moderator_groups, :class_name => "MongoidForums::Group"
+    has_and_belongs_to_many :moderator_groups, :class_name => "MongoidForums::Group", inverse_of: nil
 
     field :order, :type => Integer, :default => 0
 

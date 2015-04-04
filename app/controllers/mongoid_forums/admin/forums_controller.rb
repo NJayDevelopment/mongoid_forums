@@ -23,9 +23,13 @@ module MongoidForums
         end
       end
 
+      def show
+        @forum = Forum.find(params[:id])
+        @groups = Group.all.where(moderator: true).select{ |group| !@forum.moderator_groups.include?(group) }
+      end
+
       def edit
         @forum = Forum.find(params[:id])
-        @groups = Group.all.where(moderator: true)
       end
 
       def update
@@ -55,12 +59,16 @@ module MongoidForums
         group = Group.find(params[:group][:id])
         @forum.moderator_groups << group
         @forum.save
+
+        redirect_to admin_forum_path(@forum)
       end
 
       def remove_group
         group = Group.find(params[:group][:id])
         @forum.moderator_groups.delete(group)
         @forum.save
+
+        redirect_to admin_forum_path(@forum)
       end
       #########################################################
 
