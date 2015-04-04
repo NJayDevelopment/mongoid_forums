@@ -22,7 +22,7 @@ module MongoidForums
       def create
         if @category = Category.create(name: params[:category][:name])
           flash[:notice] = "Category created successfully"
-          redirect_to [:admin, @category]
+          redirect_to admin_categories_path
         else
           flash.now.alert = "Category could not be created"
           render :action => "new"
