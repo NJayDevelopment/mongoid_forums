@@ -4,6 +4,8 @@ module MongoidForums
     include MongoidForums::Concerns::Viewable
 
     belongs_to :category, :class_name => "MongoidForums::Category"
+    validates :category, :presence => true
+
     has_many :topics, :class_name => "MongoidForums::Topic",  dependent: :destroy
 
     # Caching
