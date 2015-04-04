@@ -16,7 +16,7 @@ module MongoidForums
       def create
         if @forum = Forum.create(name: params[:forum][:name], category: params[:forum][:category])
           flash[:notice] = "Forum created successfully"
-          redirect_to @forum
+          redirect_to [:admin, @forum]
         else
           flash.now.alert = "Forum could not be created"
           render :action => "new"

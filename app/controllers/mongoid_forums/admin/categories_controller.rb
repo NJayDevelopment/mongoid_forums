@@ -22,7 +22,7 @@ module MongoidForums
       def create
         if @category = Category.create(name: params[:category][:name])
           flash[:notice] = "Category created successfully"
-          redirect_to root_path
+          redirect_to [:admin, @category]
         else
           flash.now.alert = "Category could not be created"
           render :action => "new"
@@ -30,9 +30,18 @@ module MongoidForums
       end
 
       def edit
+        @category = Category.find(params[:id])
       end
 
       def update
+        @category = Category.find(params[:id])
+        if @category.update(category_params)
+          flash[:notice] = "Category updated successfully"
+          redirect_to admin_categories_path
+        else
+          flash.now.alert = "Category could not be updated"
+          render :action => "edit"
+        end
       end
 
       def destroy

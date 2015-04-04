@@ -44,6 +44,7 @@ module MongoidForums
 
     def moderator?(user)
       return false unless user
+      return true if category.moderator?(user)
       moderator_groups.each do |group|
         return true if group.moderator && group.members.include?(user.id)
       end

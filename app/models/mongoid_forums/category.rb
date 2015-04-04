@@ -10,5 +10,21 @@ module MongoidForums
     validates :name, :presence => true
 
     field :order, :type => Integer, :default => 0
+
+    def moderator?(user)
+      return false unless user
+      moderator_groups.each do |group|
+        return true if group.moderator && group.members.include?(user.id)
+      end
+      false
+    end
+
+    def moderators
+      array = Array.new
+      self.moderator_groups.each do |g|
+        array << g.group.members
+      end
+      return array
+    end
   end
 end

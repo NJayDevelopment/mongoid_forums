@@ -8,11 +8,15 @@
   %tr
     %th
       Name
+    %th
+      Category
 
   - @forums.each do |forum|
     %tr
       %td
         = link_to forum.name, [:admin, forum]
+      %td
+        = link_to forum.category.name, [:admin, forum.category]
       %td
         = link_to "Show", admin_forum_path(forum)
       %td
