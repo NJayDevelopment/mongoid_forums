@@ -24,6 +24,11 @@ module MongoidForums
       !locked?
     end
 
+    def toggle!(field)
+      send "#{field}=", !self.send("#{field}?")
+      save :validation => false
+    end
+
     def unread_post_count(user)
       view = View.where(:viewable_id => id, :user_id => user.id).first
       return posts.count unless view.present?

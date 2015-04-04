@@ -8,7 +8,7 @@
 ago
 
 = link_to 'Quote', new_topic_post_path(post.topic_id, :reply_to_id => post.id)
-- if post.owner_or_admin?(mongoid_forums_user)
+- if mongoid_forums_user && post.owner_or_admin?(mongoid_forums_user)
   - if can?(:edit_post, post.topic.forum)
     = link_to "Edit", edit_topic_post_path(post.topic_id, post)
   - if can?(:destroy_post, post.topic.forum)

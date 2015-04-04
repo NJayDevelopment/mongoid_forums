@@ -5,6 +5,7 @@ module MongoidForums
     before_filter :find_forum, :except => [:my_subscriptions, :my_posts, :my_topics]
 
     def show
+
       if find_topic
         register_view
 
@@ -18,7 +19,7 @@ module MongoidForums
     end
 
     def destroy
-      
+
     end
 
     def my_subscriptions
@@ -61,6 +62,7 @@ module MongoidForums
       begin
         scope = @forum.topics # TODO: pending review stuff
         @topic = scope.find(params[:id])
+        authorize! :read, @topic
       rescue Mongoid::Errors::DocumentNotFound
         flash.alert = t("forem.topic.not_found")
         redirect_to @forum and return

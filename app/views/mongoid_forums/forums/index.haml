@@ -26,8 +26,9 @@
         %td
           = link_to forum.name, forum
         %td
-          - unless forum.topics.last.nil?
-            - last_post = forum.topics.select {|topic| !topic.hidden }.last.posts.last
+          - if forum.topics.select {|topic| can?(:read, topic) }.last
+            - last_topic = forum.topics.select {|topic| can?(:read, topic) }.last
+            - last_post = last_topic.posts.last
             = time_ago_in_words ( last_post.created_at )
             ago on
             = link_to last_post.topic.name, last_post.topic

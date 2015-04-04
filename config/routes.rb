@@ -14,6 +14,14 @@ MongoidForums::Engine.routes.draw do
       post '/add_user' => 'groups#add_member', as: :add_user
       post '/rem_user' => 'groups#remove_member', as: :rem_user
     end
+
+    resources :topics do
+      member do
+        get 'toggle_hide' => 'topics#toggle_hide', :as => 'toggle_hide'
+        get 'toggle_lock' => 'topics#toggle_lock', :as => 'toggle_lock'
+        get 'toggle_pin' => 'topics#toggle_pin', :as => 'toggle_pin'
+      end
+    end
   end
 
   root :to => "forums#index"

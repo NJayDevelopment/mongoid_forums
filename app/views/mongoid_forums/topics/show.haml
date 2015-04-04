@@ -1,4 +1,9 @@
 %h1 Viewing Topic "#{@topic.name}"
+- if mongoid_forums_admin?
+  = link_to t("mongoid_forums.topics.actions.hide.#{@topic.hidden}"), toggle_hide_admin_topic_path(@forum, @topic), :class => "btn"
+  = link_to t("mongoid_forums.topics.actions.lock.#{@topic.locked}"), toggle_lock_admin_topic_path(@forum, @topic), :class => "btn"
+  = link_to t("mongoid_forums.topics.actions.pin.#{@topic.pinned}"), toggle_pin_admin_topic_path(@forum, @topic), :class => "btn"
+
 - if @topic.can_be_replied_to? && can?(:reply, @topic)
   = link_to "Reply to topic", new_topic_post_path(@topic)
 - if mongoid_forums_user && @topic.subscriber?(mongoid_forums_user.id)

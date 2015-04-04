@@ -22,26 +22,27 @@
       Views
 
   - @topics.each do |topic|
-    %tr
-      %td
-        - if topic.locked
-          &#128274
-        - if topic.hidden
-          ⚠
-        - if topic.pinned
-          *
-        = link_to topic.name, topic
-      %td
-        = topic.user.forum_display_name
-        = time_ago_in_words( topic.created_at )
-        ago
-      %td
-        = topic.posts.last.user.forum_display_name
-        = time_ago_in_words( topic.posts.last.created_at )
-        ago
-      %td
-        = mongoid_forums_user ? topic.unread_post_count(mongoid_forums_user) : ""
-      %td
-        = topic.posts.count
-      %td
-        = topic.views_count ? topic.views_count : "None"
+    - if can?(:read, topic)
+      %tr
+        %td
+          - if topic.locked
+            &#128274
+          - if topic.hidden
+            ⚠
+          - if topic.pinned
+            *
+          = link_to topic.name, topic
+        %td
+          = topic.user.forum_display_name
+          = time_ago_in_words( topic.created_at )
+          ago
+        %td
+          = topic.posts.last.user.forum_display_name
+          = time_ago_in_words( topic.posts.last.created_at )
+          ago
+        %td
+          = mongoid_forums_user ? topic.unread_post_count(mongoid_forums_user) : ""
+        %td
+          = topic.posts.count
+        %td
+          = topic.views_count ? topic.views_count : "None"
