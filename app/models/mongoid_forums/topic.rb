@@ -8,7 +8,7 @@ module MongoidForums
     after_create :subscribe_creator
 
     belongs_to :forum, :class_name => "MongoidForums::Forum"
-    has_many :posts, :class_name => "MongoidForums::Post"
+    has_many :posts, :class_name => "MongoidForums::Post", dependent: :destroy
 
     belongs_to :user, :class_name => MongoidForums.user_class.to_s
 

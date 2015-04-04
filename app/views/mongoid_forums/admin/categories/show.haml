@@ -1,0 +1,21 @@
+%h2 Listing all moderator groups for: #{@category.name}
+%table{:border => "1"}
+  %tr
+    %th
+      Name
+
+  - @category.moderator_groups.each do |group|
+    %tr
+      %td
+        = link_to group.name, [:admin, group]
+      %td
+        = link_to "Show", admin_group_path(group)
+      %td
+        = link_to "Edit", edit_admin_group_path(group)
+      %td
+        = button_to "Remove", admin_category_rem_group_path(category_id: params[:id], group: {id: group.id}), method: :post, data: { confirm: 'Are you certain you want to delete this?' }
+
+= form_tag admin_category_add_group_path(@category), :method => :post do
+  = collection_select(:group, :id, @groups, :id, :name, {:prompt => true})
+  %button
+    Add

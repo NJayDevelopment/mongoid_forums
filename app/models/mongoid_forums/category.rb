@@ -2,7 +2,8 @@ module MongoidForums
   class Category
     include Mongoid::Document
 
-    has_many :forums, :class_name => "MongoidForums::Forum"
+    has_many :forums, :class_name => "MongoidForums::Forum",  dependent: :destroy
+    has_and_belongs_to_many :moderator_groups, :class_name => "MongoidForums::Group", inverse_of: nil
 
 
     field :name

@@ -4,7 +4,7 @@ module MongoidForums
     include MongoidForums::Concerns::Viewable
 
     belongs_to :category, :class_name => "MongoidForums::Category"
-    has_many :topics, :class_name => "MongoidForums::Topic"
+    has_many :topics, :class_name => "MongoidForums::Topic",  dependent: :destroy
 
     # Caching
     field :posts_count, :type => Integer

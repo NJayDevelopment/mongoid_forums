@@ -6,7 +6,10 @@ MongoidForums::Engine.routes.draw do
       post '/add_group' => 'forums#add_group', as: :add_group
       post '/rem_group' => 'forums#remove_group', as: :rem_group
     end
-    resources :categories
+    resources :categories do
+      post '/add_group' => 'categories#add_group', as: :add_group
+      post '/rem_group' => 'categories#remove_group', as: :rem_group
+    end
     resources :groups do
       post '/add_user' => 'groups#add_member', as: :add_user
       post '/rem_user' => 'groups#remove_member', as: :rem_user
