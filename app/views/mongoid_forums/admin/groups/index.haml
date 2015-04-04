@@ -8,11 +8,15 @@
   %tr
     %th
       Name
+    %th
+      Moderator
 
   - @groups.each_with_index do |group, i|
     %tr
       %td
         = link_to group.name, [:admin, group]
+      %td
+        = group.moderator
       %td
         = link_to "Edit", edit_admin_group_path(group)
       %td

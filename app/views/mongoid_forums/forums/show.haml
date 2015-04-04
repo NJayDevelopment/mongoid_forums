@@ -1,7 +1,9 @@
 %h1 Viewing Forum "#{@forum.name}"
-= @forum.moderator?(mongoid_forums_user)
-= link_to "Add a topic", forum_path(@forum) + '/new'
+- if @forum.moderator?(mongoid_forums_user)
+  %b You are a moderator on this forum.
 %br
+%br
+= link_to "Add a topic", forum_path(@forum) + '/new'
 %br
 %h2 Topics:
 %table{:border => "1"}
