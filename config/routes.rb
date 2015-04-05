@@ -22,6 +22,11 @@ MongoidForums::Engine.routes.draw do
         get 'toggle_pin' => 'topics#toggle_pin', :as => 'toggle_pin'
       end
     end
+
+    resources :users do
+      post '/add' => 'users#add_admin', as: 'add_admin'
+      post '/remove' => 'users#remove_admin', as: 'remove_admin'
+    end
   end
 
   root :to => "forums#index"

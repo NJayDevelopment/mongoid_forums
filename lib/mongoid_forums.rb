@@ -18,7 +18,7 @@ module MongoidForums
         has_many :mongoid_forums_posts, :class_name => "MongoidForums::Post", :foreign_key => "user_id"
         has_many :mongoid_forums_topics, :class_name => "MongoidForums::Topic", :foreign_key => "user_id"
 
-        field :mongoid_admin, type: Boolean
+        field :mongoid_admin, type: Boolean, default: false
 
         def mongoid_forums_admin?
           mongoid_admin
