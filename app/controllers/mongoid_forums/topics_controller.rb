@@ -5,7 +5,6 @@ module MongoidForums
     before_filter :find_forum, :except => [:my_subscriptions, :my_posts, :my_topics]
 
     def show
-
       if find_topic
         register_view
 

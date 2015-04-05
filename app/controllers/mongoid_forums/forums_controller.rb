@@ -6,7 +6,7 @@ module MongoidForums
     before_filter :authenticate_mongoid_forums_user, :only => [:create, :new]
 
     def index
-        @categories = Category.asc(:position)
+      @categories = Category.asc(:position)
     end
 
     def show
@@ -51,15 +51,15 @@ module MongoidForums
       end
     end
 
-  private
+    private
 
-  def register_view
-    @forum.register_view_by(mongoid_forums_user)
-  end
+    def register_view
+      @forum.register_view_by(mongoid_forums_user)
+    end
 
-  def topic_params
-    params.require(:topic).permit(:name, :posts => [:text])
-  end
+    def topic_params
+      params.require(:topic).permit(:name, :posts => [:text])
+    end
 
 
   end
