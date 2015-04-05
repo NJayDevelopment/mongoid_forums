@@ -6,7 +6,7 @@ module MongoidForums
     before_filter :authenticate_mongoid_forums_user, :only => [:create, :new]
 
     def index
-      @categories = Category.all.order_by([:order, :asc])
+        @categories = Category.asc(:position)
     end
 
     def show

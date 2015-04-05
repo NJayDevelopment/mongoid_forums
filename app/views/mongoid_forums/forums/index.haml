@@ -21,7 +21,7 @@
       %th
         Views
 
-    - category.forums.order_by([:order, :asc]).each do |forum|
+    - category.forums.asc(:position).each do |forum|
       %tr
         %td
           = link_to forum.name, forum

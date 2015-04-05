@@ -6,13 +6,13 @@ module MongoidForums
       before_action :set_category, only: [:add_group, :remove_group]
 
       def index
-        @forums = Forum.all
-        @categories = Category.all
+        @forums = Forum.asc(:position)
+        @categories = Category.asc(:position)
       end
 
       def show
         @category = Category.find(params[:id])
-        @groups = Group.all.where(moderator: true).select{ |group| !@category.moderator_groups.include?(group) }
+        @groups = Group.  all.where(moderator: true).select{ |group| !@category.moderator_groups.include?(group) }
       end
 
       def new
@@ -20,7 +20,7 @@ module MongoidForums
       end
 
       def create
-        if @category = Category.create(name: params[:category][:name])
+        if @category = Category.create(category_params)
           flash[:notice] = "Category created successfully"
           redirect_to admin_categories_path
         else
@@ -76,7 +76,7 @@ module MongoidForums
       private
 
       def category_params
-        params.require(:category).permit(:name)
+        params.require(:category).permit(:name, :position)
       end
 
       def set_category

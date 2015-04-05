@@ -9,7 +9,8 @@ module MongoidForums
     field :name
     validates :name, :presence => true
 
-    field :order, :type => Integer, :default => 0
+    field :position, :type => Integer, :default => 0
+    validates :position, numericality: { only_integer: true }
 
     def moderator?(user)
       return false unless user
