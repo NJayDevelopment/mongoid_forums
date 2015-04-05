@@ -25,5 +25,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'cancancan', '~> 1.10'
 
   s.add_development_dependency "haml"
+  s.add_development_dependency "jquery-rails"
   s.add_development_dependency "pry-rails"
 end

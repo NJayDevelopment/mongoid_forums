@@ -11,7 +11,14 @@
       %td
         = button_to "Remove", admin_user_remove_admin_path("dummy", user: {id: admin.id}), method: :post, data: { confirm: 'Are you certain you want to delete this?' }
 
-= form_tag admin_user_add_admin_path("dummy"), :method => :post do
-  = collection_select(:user, :id, @non_admins, :id, :email, {:prompt => true})
-  %button
-    Add
+= form_tag admin_user_add_admin_path("dummy"), :method => :post, :id => "form_add_user" do
+  %input{:id => "userinput", :list => "users", :name => "[user][id]"}/
+  %datalist#users
+    - @non_admins.each do |user|
+      %option{:id => user.id, :value => user.forum_display_name}
+  = submit_tag("Add Admin")
+
+:javascript
+  $("#form_add_user").submit(function(){
+    $("#userinput").val($('#users').find('option[value="' + $('#userinput').val() + '"]').attr('id'));
+  });
