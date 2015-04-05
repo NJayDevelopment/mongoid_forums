@@ -23,7 +23,7 @@ class MongoidForums::ApplicationController < ApplicationController
   end
 
   def set_categories
-    @categories = MongoidForums::Category.all
+    @categories = MongoidForums::Category.asc(:position)
   end
 
     def authenticate_mongoid_forums_user
