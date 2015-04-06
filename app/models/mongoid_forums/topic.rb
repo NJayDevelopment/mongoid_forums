@@ -13,12 +13,13 @@ module MongoidForums
     belongs_to :user, :class_name => MongoidForums.user_class.to_s
 
     field :name
-    validates :name, :presence => true
 
     field :locked, type: Boolean, default: false
     field :pinned, type: Boolean, default: false
     field :hidden, type: Boolean, default: false
 
+    validates :name, :presence => true, :length => { maximum: 255 }
+    validates :user, :presence => true
 
     def can_be_replied_to?
       !locked?

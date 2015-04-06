@@ -2,7 +2,7 @@ module MongoidForums
   class Group
     include Mongoid::Document
 
-    validates :name, :presence => true
+    validates :name, :moderator, :presence => true
 
     field :name, type: String
     field :moderator, type: Boolean

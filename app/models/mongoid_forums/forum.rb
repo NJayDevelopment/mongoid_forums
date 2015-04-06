@@ -12,10 +12,10 @@ module MongoidForums
     field :posts_count, :type => Integer
 
     field :name
-    validates :name, :presence => true
 
     has_and_belongs_to_many :moderator_groups, :class_name => "MongoidForums::Group", inverse_of: nil
 
+    validates :category, :name, :presence => true
     field :position, :type => Integer, :default => 0
     validates :position, numericality: { only_integer: true }
 
