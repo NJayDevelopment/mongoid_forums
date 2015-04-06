@@ -4,6 +4,8 @@
   %h2
     = category.name
     Category
+  - if category.moderator?(mongoid_forums_user)
+    %b You are a moderator of this category
   %table{:border => "1"}
     %tr
       %th
@@ -19,13 +21,14 @@
       %th
         Views
 
-    - category.forums.order_by([:order, :asc]).each do |forum|
+    - category.forums.asc(:position).each do |forum|
       %tr
         %td
           = link_to forum.name, forum
         %td
-          - unless forum.topics.last.nil?
-            - last_post = forum.topics.select {|topic| !topic.hidden }.last.posts.last
+          - if forum.topics.select {|topic| can?(:read, topic) }.last
+            - last_topic = forum.topics.select {|topic| can?(:read, topic) }.last
+            - last_post = last_topic.posts.last
             = time_ago_in_words ( last_post.created_at )
             ago on
             = link_to last_post.topic.name, last_post.topic

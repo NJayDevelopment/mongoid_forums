@@ -12,12 +12,13 @@ module MongoidForums
         @posts = @posts.page(params[:page]).per(MongoidForums.per_page)
 
         if mongoid_forums_user.present?
-          Alert.where(:user_id => mongoid_forums_user.id).update_all(:read => true)
+          Alert.where(user_id: mongoid_forums_user.id, read: false, subscription_id: Subscription.where(subscribable_id: @topic.id, subscriber_id: mongoid_forums_user.id).first).update_all(:read => true, :ready_at => Time.now)
         end
       end
     end
 
     def destroy
+
     end
 
     def my_subscriptions
@@ -54,14 +55,13 @@ module MongoidForums
 
     def find_forum
       @forum = Topic.find(params[:id]).forum
-      allow? "mongoid_forums/forums", :show, @forum
     end
 
     def find_topic
       begin
         scope = @forum.topics # TODO: pending review stuff
         @topic = scope.find(params[:id])
-        allow? "mongoid_forums/topics", :show, @topic
+        authorize! :read, @topic
       rescue Mongoid::Errors::DocumentNotFound
         flash.alert = t("forem.topic.not_found")
         redirect_to @forum and return

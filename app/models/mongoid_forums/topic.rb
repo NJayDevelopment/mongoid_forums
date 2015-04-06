@@ -8,17 +8,27 @@ module MongoidForums
     after_create :subscribe_creator
 
     belongs_to :forum, :class_name => "MongoidForums::Forum"
-    has_many :posts, :class_name => "MongoidForums::Post"
+    has_many :posts, :class_name => "MongoidForums::Post", dependent: :destroy
 
     belongs_to :user, :class_name => MongoidForums.user_class.to_s
 
     field :name
-    validates :name, :presence => true
 
     field :locked, type: Boolean, default: false
     field :pinned, type: Boolean, default: false
     field :hidden, type: Boolean, default: false
 
+    validates :name, :presence => true, :length => { maximum: 255 }
+    validates :user, :presence => true
+
+    def can_be_replied_to?
+      !locked?
+    end
+
+    def toggle!(field)
+      send "#{field}=", !self.send("#{field}?")
+      save :validation => false
+    end
 
     def unread_post_count(user)
       view = View.where(:viewable_id => id, :user_id => user.id).first

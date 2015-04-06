@@ -64,16 +64,16 @@ module MongoidForums
     def text
       str = ""
       case self.subscription.subscribable_type
-      when "MongoidForums::Topic"
-        str += self.mongoid_forums_topic_replier
-        if self.mongoid_forums_topic_count > 0
-          str += " and " + self.mongoid_forums_topic_count.to_s + " other" + (self.mongoid_forums_topic_count > 1 ? "s" : "")
+        when "MongoidForums::Topic"
+          str += self.mongoid_forums_topic_replier
+          if self.mongoid_forums_topic_count > 0
+            str += " and " + self.mongoid_forums_topic_count.to_s + " other" + (self.mongoid_forums_topic_count > 1 ? "s" : "")
+          end
+          str += " replied to " + self.subscription.subscribable.name
+        else
+          str
         end
-        str += " replied to " + self.subscription.subscribable.subject
-      else
-        str
-      end
-      str += " " + time_ago_in_words(self.updated_at, false, :vague => true) + " ago"
+      return str
     end
   end
 

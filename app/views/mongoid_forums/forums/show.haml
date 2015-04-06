@@ -1,6 +1,9 @@
 %h1 Viewing Forum "#{@forum.name}"
-= link_to "Add a topic", forum_path(@forum) + '/new'
+- if @forum.moderator?(mongoid_forums_user)
+  %b You are a moderator on this forum.
 %br
+%br
+= link_to "Add a topic", forum_path(@forum) + '/new'
 %br
 %h2 Topics:
 %table{:border => "1"}
@@ -19,7 +22,7 @@
       Views
 
   - @topics.each do |topic|
-    - if allow? "mongoid_forums/topics", :show, topic
+    - if can?(:read, topic)
       %tr
         %td
           - if topic.locked

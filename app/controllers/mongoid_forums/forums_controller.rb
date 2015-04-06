@@ -2,8 +2,11 @@ require_dependency "mongoid_forums/application_controller"
 
 module MongoidForums
   class ForumsController < ApplicationController
+    load_and_authorize_resource :class => 'MongoidForums::Forum', :only => :show
+    before_filter :authenticate_mongoid_forums_user, :only => [:create, :new]
+
     def index
-      @categories = Category.all.order_by([:order, :asc])
+      @categories = Category.asc(:position)
     end
 
     def show
@@ -18,14 +21,18 @@ module MongoidForums
     # it is to create a new TOPIC within a forum
     def new
       @forum = Forum.find(params[:forum_id])
+      authorize! :create_topic, @forum
+
       @topic = Topic.new
       @topic.forum = @forum.id
     end
-    
+
     # Note: This is not an action to make a new Forum!
     # it is to create a new TOPIC within a forum
     def create
       @forum = Forum.find(params[:forum_id])
+      authorize! :create_topic, @forum
+
       @topic = Topic.new
       @topic.name = topic_params[:name]
       @topic.user = mongoid_forums_user.id
@@ -44,15 +51,15 @@ module MongoidForums
       end
     end
 
-  private
+    private
 
-  def register_view
-    @forum.register_view_by(mongoid_forums_user)
-  end
+    def register_view
+      @forum.register_view_by(mongoid_forums_user)
+    end
 
-  def topic_params
-    params.require(:topic).permit(:name, :posts => [:text])
-  end
+    def topic_params
+      params.require(:topic).permit(:name, :posts => [:text])
+    end
 
 
   end

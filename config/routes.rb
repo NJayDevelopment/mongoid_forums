@@ -2,8 +2,31 @@ MongoidForums::Engine.routes.draw do
 
   namespace :admin do
     root :to => 'base#index'
-    resources :forums
-    resources :categories
+    resources :forums do
+      post '/add_group' => 'forums#add_group', as: :add_group
+      post '/rem_group' => 'forums#remove_group', as: :rem_group
+    end
+    resources :categories do
+      post '/add_group' => 'categories#add_group', as: :add_group
+      post '/rem_group' => 'categories#remove_group', as: :rem_group
+    end
+    resources :groups do
+      post '/add_user' => 'groups#add_member', as: :add_user
+      post '/rem_user' => 'groups#remove_member', as: :rem_user
+    end
+
+    resources :topics do
+      member do
+        get 'toggle_hide' => 'topics#toggle_hide', :as => 'toggle_hide'
+        get 'toggle_lock' => 'topics#toggle_lock', :as => 'toggle_lock'
+        get 'toggle_pin' => 'topics#toggle_pin', :as => 'toggle_pin'
+      end
+    end
+
+    resources :users do
+      post '/add' => 'users#add_admin', as: 'add_admin'
+      post '/remove' => 'users#remove_admin', as: 'remove_admin'
+    end
   end
 
   root :to => "forums#index"
@@ -33,7 +56,6 @@ MongoidForums::Engine.routes.draw do
       get :unsubscribe
     end
   end
-
 
   resources :categories
 

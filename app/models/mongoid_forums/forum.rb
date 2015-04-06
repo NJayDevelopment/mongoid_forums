@@ -4,15 +4,20 @@ module MongoidForums
     include MongoidForums::Concerns::Viewable
 
     belongs_to :category, :class_name => "MongoidForums::Category"
-    has_many :topics, :class_name => "MongoidForums::Topic"
+    validates :category, :presence => true
+
+    has_many :topics, :class_name => "MongoidForums::Topic",  dependent: :destroy
 
     # Caching
     field :posts_count, :type => Integer
 
     field :name
-    validates :name, :presence => true
 
-    field :order, :type => Integer, :default => 0
+    has_and_belongs_to_many :moderator_groups, :class_name => "MongoidForums::Group", inverse_of: nil
+
+    validates :category, :name, :presence => true
+    field :position, :type => Integer, :default => 0
+    validates :position, numericality: { only_integer: true }
 
     def unread_topic_count(user)
       view = View.where(:viewable_id => id, :user_id => user.id).first
@@ -38,5 +43,25 @@ module MongoidForums
       end
       self.save
     end
+
+
+    def moderator?(user)
+      return false unless user
+      return true if category.moderator?(user)
+      moderator_groups.each do |group|
+        return true if group.moderator && group.members.include?(user.id)
+      end
+      false
+    end
+
+    def moderators
+      array = Array.new
+      self.moderator_groups.each do |g|
+        array << g.group.members
+      end
+      return array
+    end
+
+
   end
 end
