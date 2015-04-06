@@ -12,7 +12,7 @@ module MongoidForums
         @posts = @posts.page(params[:page]).per(MongoidForums.per_page)
 
         if mongoid_forums_user.present?
-          Alert.where(:user_id => mongoid_forums_user.id).update_all(:read => true)
+          Alert.where(user_id: mongoid_forums_user.id, read: false, subscription_id: Subscription.where(subscribable_id: @topic.id, subscriber_id: mongoid_forums_user.id).first).update_all(:read => true, :ready_at => Time.now)
         end
       end
     end
