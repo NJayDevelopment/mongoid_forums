@@ -3,7 +3,7 @@ module MongoidForums
     include Mongoid::Document
     include Mongoid::Timestamps
 
-    before_save :set_topic_last_post_at
+    after_create :set_topic_last_post_at
 
     belongs_to :topic, :class_name => "MongoidForums::Topic"
 
