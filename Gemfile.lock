@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    mongoid-forums (0.0.10)
+    mongoid-forums (1.0.0)
       cancancan (~> 1.10)
       devise (= 3.4.1)
       kaminari (= 0.15.1)
@@ -63,7 +63,7 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     erubis (2.7.0)
-    globalid (0.3.3)
+    globalid (0.3.5)
       activesupport (>= 4.1.0)
     haml (4.0.6)
       tilt

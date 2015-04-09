@@ -43,10 +43,10 @@ module MongoidForums
       @topic.posts << @post
 
       if @topic.save && @topic.posts.first.save
-        flash[:notice] = "Topic created successfully"
+        flash[:notice] = t("mongoid_forums.topic.created")
         redirect_to @topic
       else
-        flash.now.alert = "Topic could not be created"
+        flash.now.alert = t("mongoid_forums.topic.not_created")
         render :action => "new"
       end
     end
