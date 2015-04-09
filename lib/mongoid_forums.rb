@@ -3,6 +3,8 @@ require 'mongoid_forums/sanitizer'
 require 'mongoid_forums/default_permissions'
 require 'sanitize'
 
+require 'decorators'
+
 module MongoidForums
   mattr_accessor :per_page, :user_class, :formatter, :email_from_address, :sign_in_path
 

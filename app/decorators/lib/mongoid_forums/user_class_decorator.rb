@@ -1,0 +1,1 @@
+MongoidForums.decorate_user_class! if MongoidForums.user_class
