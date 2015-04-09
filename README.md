@@ -2,6 +2,7 @@ MongoidForums
 ============
 
 A forum system for Rails 4 and Mongoid. 
+Inspired by Forem
 
 # Installation
 
@@ -64,6 +65,45 @@ Here's a comprehensive list of the features currently in Mongoid Forumsf:
 * [A flexible permissions system](https://github.com/radar/forem/wiki/Authorization-System) (Works exactly as Forem does, using CanCanCan and allowing overrides)
 * [Translations](https://github.com/radar/forem/wiki/Translations) (Not complete, some messages currently are hardcoded in English)
 * [Flexible configuration](https://github.com/radar/forem/wiki/Configuration) (All features of Forem except avatars, profile links, and theme. We are working hard on adding these, but you can also add them to your own project if needed through the default method of overriding rails engine controllers, models, and views!)
+## View Customisation
+
+If you want to customise Forem, you can copy over the views using the `mongoid_forums:views` generator:
+
+    rails g mongoid_forums:views
+
+You will then be able to edit the forem views inside the `app/views/mongoid_forums` of your application. These views will take precedence over those in the engine.
+
+
+## Extending Classes
+
+All of MongoidForum's business logic (models, controllers, helpers, etc) can easily be extended / overridden to meet your exact requirements using standard Ruby idioms.
+
+Standard practice for including such changes in your application or extension is to create a directory app/decorators. place file within the relevant app/decorators/models or app/decorators/controllers directory with the original class name with _decorator appended.
+
+### Adding a custom method to the Post model:
+
+```ruby
+# app/decorators/models/mongoid_forums/post_decorator.rb
+
+MongoidForums::Post.class_eval do
+  def some_method
+    ...
+  end
+end
+```
+
+### Adding a custom method to the PostsController:
+
+```ruby
+# app/decorators/controllers/mongoid_forums/posts_controller_decorator.rb
+
+MongoidForums::PostsController.class_eval do
+  def some_action
+    ...
+  end
+end
+```
+
 
 Planned Features:
 - [ ] [emoji](http://www.emoji-cheat-sheet.com/)
