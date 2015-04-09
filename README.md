@@ -31,32 +31,47 @@ end
 ```
 Or simply return the user's display name as the `to_s` method in your user model.
 
-Please note that if you are using Devise, User model does not have `name` column by default,
-so you either should use custom migration to add it or use another column (`email` for example).
-
-
-
-MongoidForums is not as flexible as Forem, nor does it have all the functionality, but forem does not support Mongoid and thus this project was created. This project aspires to eventually have all the functionality of Forem, along with more features.
-The code for this project intends to remain simple.
+Please note that if you are using Devise, User model does not have `name` field by default,
+so you either should add it or use another column (`email` for example).
 
 The routes (along with some other designs such as Alerts system) for this project are based around Overcast Network's forum system (https://oc.tc/forums)
 
-See here for the public version this project is based on (and borrows some code from):
+See here for an old open source version of oc.tc/forums that this project is based on (and borrows some code from):
 https://github.com/kultus/forem-2
 
 
-TODO:
-- [X] Permissions system
-- [X] Sticky
-- [X] Hidden
-- [X] Pinned
-- [X] Views tracking
-- [X] Subscribing to topics + getting alerts
-- [X] Generator to easily setup mongoid_forums, also to not depend on a model specifically named User
-- [X] Ability to obtain how many posts a user has not read for a topic and how many topics a user has not seen for a forum
-- [X] More admin panel controls (changing forum names, changing categories, etc)
-- [X] Category/Forum/Topic/Post visibility level. (taken care of with flexible CanCanCan permissions) 
-- [ ] Archiving
-- [ ] Mass moderation (here users can mass moderate their own posts and hide their topics, and a moderator can hide OTHER user's topics and posts
+## Features
+
+Here's a comprehensive list of the features currently in Mongoid Forumsf:
+
+* Forums
+  * CRUD operations (provided by an admin backend)
+* Topics
+  * Viewing all topics for a forum
+  * Creating of new topics
+  * Editing topics
+  * Locking topics
+  * Hiding topics
+  * Pinning topics
+* Posts
+  * Replying to topics
+  * Deleting own posts
+  * Blocking replies to locked topics
+  * Editing posts
+* Text Formatting
+  * Posts are HTML escaped and pre tagged by default.
+  * Pluggable formatters for other behaviour
+* [A flexible permissions system](https://github.com/radar/forem/wiki/Authorization-System) (Works exactly as Forem does, using CanCanCan and allowing overrides)
+* [Translations](https://github.com/radar/forem/wiki/Translations) (Not complete, some messages currently are hardcoded in English)
+* [Flexible configuration](https://github.com/radar/forem/wiki/Configuration) (All features of Forem except avatars, profile links, and theme. We are working hard on adding these, but you can also add them to your own project if needed through the default method of overriding rails engine controllers, models, and views!)
+
+Planned Features:
+- [ ] [emoji](http://www.emoji-cheat-sheet.com/)
+- [ ] Mass moderation
 - [ ] Option to have to approve topics/posts manually
+- [ ] Block spammers feature
+- [ ] Archiving
+- [ ] Theming
+- [ ] User profile links
+- [ ] Avatars
 
