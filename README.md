@@ -2,7 +2,9 @@ MongoidForums
 ============
 
 A forum system for Rails 4 and Mongoid. 
-Inspired by Forem
+Inspired by Forem.
+
+Created due to lack of functioning rails 4 mongoid engines.
 
 # Installation
 
