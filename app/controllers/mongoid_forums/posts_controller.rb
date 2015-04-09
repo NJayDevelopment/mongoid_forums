@@ -4,6 +4,7 @@ module MongoidForums
   class PostsController < ApplicationController
     before_filter :find_topic
     before_filter :authenticate_mongoid_forums_user, except: :show
+    before_filter :reject_locked_topic!, only: [:new, :create]
 
     def new
       authorize! :reply, @topic
@@ -11,7 +12,20 @@ module MongoidForums
       @post.topic = @topic.id
       if params[:reply_to_id]
         find_reply_to_post
+
+        if @reply_to.id && @reply_to.id == @topic.posts.first.id
+          flash[:alert] = t("mongoid_forums.post.not_created_quote_original_post")
+          redirect_to @topic
+          return
+        end
       end
+
+      if @topic.locked
+        flash[:alert] = t("mongoid_forums.post.not_created_topic_locked")
+        redirect_to @topic
+        return
+      end
+
     end
 
     def create
@@ -19,25 +33,13 @@ module MongoidForums
       @post = @topic.posts.build(post_params)
       @post.user = mongoid_forums_user
 
-      if @post.reply_to_id && @post.reply_to_id == @topic.posts.first.id
-        flash[:alert] = "You may not quote the original post"
-        redirect_to @topic
-        return
-      end
-
-      if @topic.locked
-        flash[:alert] = "You may not post on a locked topic"
-        redirect_to @topic
-        return
-      end
-
       if @post.save
         @topic.alert_subscribers(mongoid_forums_user.id)
         @topic.forum.increment_posts_count
-        flash[:notice] = "Reply created successfully"
+        flash[:notice] = t("mongoid_forums.post.created")
         redirect_to @topic
       else
-        flash.now.alert = "Reply could not be created"
+        flash.now.alert = t("mongoid_forums.post.not_created")
         render :action => "new"
       end
     end
@@ -51,19 +53,13 @@ module MongoidForums
     end
 
     def update
-      if @topic.locked?
-        flash.alert = "You may not update a post on a locked topic!"
-        redirect_to [@topic] and return
-      end
-
       authorize! :edit_post, @topic.forum
       find_post
 
       if @post.owner_or_admin?(mongoid_forums_user) && @post.update_attributes(post_params)
-        flash[:notice] = "Reply updated successfully"
-        redirect_to @topic
+        redirect_to @topic, :notice => t('edited', :scope => 'mongoid_forums.post')
       else
-        flash[:notice] = "Reply could not be updated"
+        flash.now.alert = t("mongoid_forums.post.not_edited")
         render :action => "edit"
       end
     end
@@ -71,7 +67,7 @@ module MongoidForums
     def destroy
       find_post
       if @topic.posts.first == @post
-        flash[:alert] = "You may not delete the first post!"
+        flash[:alert] = t("mongoid_forums.post.cannot_delete_first_post")
         redirect_to @topic
         return
       end
@@ -84,24 +80,32 @@ module MongoidForums
       end
 
       if @post.destroy
-        flash[:notice] = "Post deleted successfully"
+        flash[:notice] = t("mongoid_forums.post.deleted")
         redirect_to @topic
       else
-        flash[:notice] = "Post could not be deleted"
+        flash[:notice] = t("mongoid_forums.post.cannot_delete")
         redirect_to @topic
       end
     end
 
     private
 
+    #TODO: Decide if this should be used
     def destroy_successful
       if @post.topic.posts.count == 0
         @post.topic.destroy
         flash[:notice] = "Post was deleted successfully along with it's topic."
-        redirect_to [@topic.forum]
+        redirect_to @topic.forum
       else
         flash[:notice] = "Post was deleted successfully"
-        redirect_to [@topic.forum, @topic]
+        redirect_to @topic
+      end
+    end
+
+    def reject_locked_topic!
+      if @topic.locked?
+        flash.alert = t("mongoid_forums.post.not_created_topic_locked")
+        redirect_to @topic and return
       end
     end
 

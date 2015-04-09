@@ -29,7 +29,7 @@ class MongoidForums::ApplicationController < ApplicationController
     def authenticate_mongoid_forums_user
     if !mongoid_forums_user
       session["user_return_to"] = request.fullpath
-      flash.alert = "You must be signed in"
+      flash.alert = t("mongoid_forums.errors.not_signed_in")
       devise_route = "new_#{MongoidForums.user_class.to_s.underscore}_session_path"
       sign_in_path = MongoidForums.sign_in_path ||
         (main_app.respond_to?(devise_route) && main_app.send(devise_route)) ||

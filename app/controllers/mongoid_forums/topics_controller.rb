@@ -38,7 +38,7 @@ module MongoidForums
     def subscribe
       if find_topic
         @topic.subscribe_user(mongoid_forums_user.id)
-        flash[:notice] = "Successfully subscribed to topic"
+        flash[:notice] = t("mongoid_forums.topic.subscribed")
         redirect_to topic_url(@topic)
       end
     end
@@ -46,7 +46,7 @@ module MongoidForums
     def unsubscribe
       if find_topic
         @topic.unsubscribe_user(mongoid_forums_user.id)
-        flash[:notice] = "Successfully unsubscribed to topic"
+        flash[:notice] = t("mongoid_forums.topic.unsubscribed")
         redirect_to topic_url(@topic)
       end
     end
@@ -63,7 +63,7 @@ module MongoidForums
         @topic = scope.find(params[:id])
         authorize! :read, @topic
       rescue Mongoid::Errors::DocumentNotFound
-        flash.alert = t("forem.topic.not_found")
+        flash.alert = t("mongoid_forums.topic.not_found")
         redirect_to @forum and return
       end
     end

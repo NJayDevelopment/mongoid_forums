@@ -38,6 +38,8 @@ en:
         index: Manage Groups
         created: The group was successfully created.
         not_created: Group could not be created.
+        updated: The group was successfully updated.
+        not_updated: Group could not be updated.
         deleted: The selected group has been deleted.
       groups:
         show:
@@ -145,11 +147,13 @@ en:
       edit: Edit
       not_created: Your reply could not be posted.
       not_created_topic_locked: You cannot reply to a locked topic.
+      not_created_quote_original_post: You cannot quote the original post.
       edited: Your post has been edited.
       not_edited: Your post could not be edited.
       deleted: Your post has been deleted.
       deleted_with_topic: Only post in topic deleted. Topic also deleted.
       cannot_delete: You cannot delete a post you do not own.
+      cannot_delete_first_post: You cannot delete the first post in a topic.
       in_reply_to: In reply to
     posts:
       moderation:
