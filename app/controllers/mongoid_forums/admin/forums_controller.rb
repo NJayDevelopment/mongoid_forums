@@ -16,10 +16,10 @@ module MongoidForums
       def create
         @forum = Forum.new(forum_params)
         if @forum.save
-          flash[:notice] = "Forum created successfully"
+          flash[:notice] = t("mongoid_forums.admin.forum.created")
           redirect_to [:admin, @forum]
         else
-          flash.now.alert = "Forum could not be created"
+          flash.now.alert = t("mongoid_forums.admin.forum.not_created")
           render :action => "new"
         end
       end
@@ -36,23 +36,19 @@ module MongoidForums
       def update
         @forum = Forum.find(params[:id])
         if @forum.update(forum_params)
-          flash[:notice] = "Forum updated successfully"
+          flash[:notice] = t("mongoid_forums.admin.forum.updated")
           redirect_to @forum
         else
-          flash.now.alert = "Forum could not be updated"
+          flash.now.alert = t("mongoid_forums.admin.forum.not_updated")
           render :action => "edit"
         end
       end
 
       def destroy
         @forum = Forum.find(params[:id])
-        if @forum.destroy
-          flash[:notice] = "Forum destroyed successfully"
-          redirect_to admin_forums_path
-        else
-          flash.now.alert = "Forum could not be destroyed"
-          render :action => "index"
-        end
+        @forum.destroy
+        flash[:notice] = t("mongoid_forums.admin.forum.deleted")
+        redirect_to admin_forums_path
       end
 
       ### Temporary Methods - Try Not To Cringe Too Much <3 ###

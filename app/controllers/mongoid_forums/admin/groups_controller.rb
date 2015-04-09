@@ -13,11 +13,12 @@ module MongoidForums
       end
 
       def create
-        if @group = Group.create(params.require(:group).permit(:name, :moderator, :members))
-          flash[:notice] = "Group created successfully"
+        @group =  Group.new(params.require(:group).permit(:name, :moderator, :members))
+        if @group.save
+          flash[:notice] = t("mongoid_forums.admin.group.created")
           redirect_to [:admin, @group]
         else
-          flash.now.alert = "Group could not be created"
+          flash[:notice] = t("mongoid_forums.admin.group.not_created")
           render :action => "new"
         end
       end
@@ -29,10 +30,10 @@ module MongoidForums
       def update
         @group = Group.find(params[:id])
         if @group.update_attributes(params.require(:group).permit(:name, :members))
-          flash[:notice] = "Group updated successfully"
+          flash[:notice] = t("mongoid_forums.admin.group.updated")
           redirect_to [:admin, @group]
         else
-          flash[:notice] = "Group could not be updated"
+          flash[:notice] = t("mongoid_forums.admin.group.not_updated")
           render :action => "edit"
         end
       end
@@ -45,14 +46,9 @@ module MongoidForums
 
       def destroy
         @group = Group.find(params[:id])
-
-        if @group.destroy
-          flash[:notice] = "Group destroyed successfully"
-          redirect_to admin_groups_path
-        else
-          flash.now.alert = "Group could not be destroyed"
-          redirect_to admin_groups_path
-        end
+        @group.destroy
+        flash[:notice] = t("mongoid_forums.admin.group.deleted")
+        redirect_to admin_groups_path
       end
 
       ### Temporary Methods - Try Not To Cringe Too Much <3 ###

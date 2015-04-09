@@ -38,6 +38,8 @@ en:
         index: Manage Groups
         created: The group was successfully created.
         not_created: Group could not be created.
+        updated: The group was successfully updated.
+        not_updated: Group could not be updated.
         deleted: The selected group has been deleted.
       groups:
         show:

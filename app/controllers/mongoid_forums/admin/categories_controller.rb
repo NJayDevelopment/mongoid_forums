@@ -21,10 +21,10 @@ module MongoidForums
 
       def create
         if @category = Category.create(category_params)
-          flash[:notice] = "Category created successfully"
+          flash[:notice] = t("mongoid_forums.admin.category.created")
           redirect_to admin_categories_path
         else
-          flash.now.alert = "Category could not be created"
+          flash.now.alert = t("mongoid_forums.admin.category.not_created")
           render :action => "new"
         end
       end
@@ -36,23 +36,19 @@ module MongoidForums
       def update
         @category = Category.find(params[:id])
         if @category.update(category_params)
-          flash[:notice] = "Category updated successfully"
+          flash[:notice] = t("mongoid_forums.admin.category.updated")
           redirect_to admin_categories_path
         else
-          flash.now.alert = "Category could not be updated"
+          flash[:notice] = t("mongoid_forums.admin.category.not_updated")
           render :action => "edit"
         end
       end
 
       def destroy
         @category = Category.find(params[:id])
-        if @category.destroy
-          flash[:notice] = "Category destroyed successfully"
-          redirect_to admin_categories_path
-        else
-          flash.now.alert = "Category could not be destroyed"
-          render :action => "index"
-        end
+        @category.destroy
+        flash[:notice] = t("mongoid_forums.admin.category.deleted")
+        redirect_to admin_categories_path
       end
 
       ### Temporary Methods - Try Not To Cringe Too Much <3 ###
