@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    mongoid-forums (1.0.1)
+    mongoid-forums (1.0.2)
       cancancan (~> 1.10)
       decorators (~> 1.0.2)
       devise (= 3.4.1)

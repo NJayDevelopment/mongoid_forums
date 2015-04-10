@@ -6,7 +6,7 @@ require 'sanitize'
 require 'decorators'
 
 module MongoidForums
-  mattr_accessor :per_page, :user_class, :formatter, :email_from_address, :sign_in_path
+  mattr_accessor :per_page, :user_class, :formatter, :email_from_address, :sign_in_path, :layout, :admin_layout
 
   class << self
     def per_page
@@ -46,5 +46,14 @@ module MongoidForums
         end
       end
     end
+
+    def layout
+      @@layout || "mongoid_forums/default"
+    end
+
+    def admin_layout
+      @@admin_layout || layout
+    end
+
   end
 end
