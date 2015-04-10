@@ -67,6 +67,7 @@ Here's a comprehensive list of the features currently in Mongoid Forumsf:
 * [A flexible permissions system](https://github.com/radar/forem/wiki/Authorization-System) (Works exactly as Forem does, using CanCanCan and allowing overrides)
 * [Translations](https://github.com/radar/forem/wiki/Translations) (Not complete, some messages currently are hardcoded in English)
 * [Flexible configuration](https://github.com/radar/forem/wiki/Configuration) (All features of Forem except avatars, profile links, and theme. We are working hard on adding these, but you can also add them to your own project if needed through the default method of overriding rails engine controllers, models, and views!)
+
 ## View Customisation
 
 If you want to customise Forem, you can copy over the views using the `mongoid_forums:views` generator:
