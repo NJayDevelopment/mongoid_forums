@@ -10,8 +10,8 @@ require "rails/test_unit/railtie"
 require "sprockets/railtie" # Uncomment this line for Rails 3.1+
 
 Bundler.require(*Rails.groups)
-require "mongoid_forums"
-require "kaminari" # TODO: Generator should do this
+#require "mongoid_forums"
+#require "kaminari" # TODO: Generator should do this
 module Dummy
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.

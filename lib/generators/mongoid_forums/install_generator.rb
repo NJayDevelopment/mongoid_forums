@@ -1,5 +1,6 @@
 # Thanks to radar/forem
 # The code used to inspire this generator!
+require 'mongoid_forums'
 require 'rails/generators'
 module MongoidForums
   module Generators

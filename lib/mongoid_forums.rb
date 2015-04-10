@@ -1,9 +1,12 @@
+# Fix for #185 and build issues
+require 'active_support/core_ext/kernel/singleton_class'
+require 'decorators'
 require "mongoid_forums/engine"
 require 'mongoid_forums/sanitizer'
 require 'mongoid_forums/default_permissions'
 require 'sanitize'
 require 'haml'
-require 'decorators'
+require "mongoid"
 
 module MongoidForums
   mattr_accessor :per_page, :user_class, :formatter, :email_from_address, :sign_in_path
