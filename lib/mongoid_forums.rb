@@ -2,7 +2,7 @@ require "mongoid_forums/engine"
 require 'mongoid_forums/sanitizer'
 require 'mongoid_forums/default_permissions'
 require 'sanitize'
-
+require 'haml'
 require 'decorators'
 
 module MongoidForums

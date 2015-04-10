@@ -24,8 +24,8 @@ Gem::Specification.new do |s|
   s.add_dependency 'sanitize', '2.0.6'
   s.add_dependency 'cancancan', '~> 1.10'
   s.add_dependency 'decorators', '~> 1.0.2'
+  s.add_dependency "haml"
 
-  s.add_development_dependency "haml"
   s.add_development_dependency "jquery-rails"
   s.add_development_dependency "pry-rails"
 end
