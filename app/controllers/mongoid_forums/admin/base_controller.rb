@@ -4,6 +4,9 @@ module MongoidForums
   class Admin::BaseController < ApplicationController
     before_filter :authenticate_mongoid_forums_admin
 
+    layout MongoidForums.admin_layout
+
+
     def index
     end
 

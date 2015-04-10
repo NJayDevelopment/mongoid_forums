@@ -3,6 +3,8 @@ require 'cancan'
 class MongoidForums::ApplicationController < ApplicationController
   helper MongoidForums::Engine.helpers
 
+  layout MongoidForums.layout
+
   rescue_from CanCan::AccessDenied do
     redirect_to root_path, :alert => t("mongoid.access_denied")
   end
