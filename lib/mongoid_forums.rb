@@ -9,10 +9,6 @@ module MongoidForums
   mattr_accessor :per_page, :user_class, :formatter, :email_from_address, :sign_in_path
 
   class << self
-    def per_page
-      @@per_page || 20
-    end
-
     def decorate_user_class!
       MongoidForums.user_class.class_eval do
         include MongoidForums::DefaultPermissions
@@ -32,6 +28,10 @@ module MongoidForums
         end unless method_defined? :forum_display_name
 
       end
+    end
+
+    def per_page
+      @@per_page || 20
     end
 
     def user_class

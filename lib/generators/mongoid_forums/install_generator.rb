@@ -11,22 +11,9 @@ module MongoidForums
       desc "Used to install MongoidForums"
 
       def determine_user_class
-        # Is there a cleaner way to do this?
-        if options["user-class"]
-          puts "Class of item passed as argument #{options["user-class"].class}"
-          @user_class = options["user-class"]
-        else
-          @user_class = ask("What is your user class called? [User]")
-          puts "Class of item passed from prompt #{@user_class.class}"
-        end
-
-        if @user_class.blank?
-          @user_class = 'User'
-          puts "Class of item set when blank #{@user_class.class}"
-        else
-          @user_class = @user_class
-          puts "Class of item set when passed #{@user_class.class}"
-        end
+        @user_class = options["user-class"].presence ||
+                      ask("What is your user class called? [User]").presence ||
+                      'User'
       end
 
 
@@ -58,6 +45,7 @@ module MongoidForums
         else
           puts "Adding mongoid_forums initializer (config/initializers/mongoid_forums.rb)..."
           template "initializer.rb", path
+          require path
         end
       end
 
