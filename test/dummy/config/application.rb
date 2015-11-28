@@ -10,8 +10,9 @@ require "rails/test_unit/railtie"
 require "sprockets/railtie" # Uncomment this line for Rails 3.1+
 
 Bundler.require(*Rails.groups)
-#require "mongoid_forums"
-#require "kaminari" # TODO: Generator should do this
+require "mongoid_forums"
+require 'mongoid'
+
 module Dummy
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
@@ -25,5 +26,10 @@ module Dummy
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
+
+    Mongoid.load!(File.expand_path('mongoid.yml', './config'))
+    config.generators do |g|
+      g.orm :mongoid
+    end
   end
 end

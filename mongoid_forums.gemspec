@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency "rails", "~> 4.2.0"
-  s.add_dependency 'mongoid', "4.0.0"
+  s.add_dependency 'mongoid', "5.0.0"
   s.add_dependency 'simple_form'
   s.add_dependency 'kaminari', '0.15.1'
   s.add_dependency 'sanitize', '2.0.6'
