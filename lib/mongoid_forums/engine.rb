@@ -1,5 +1,6 @@
 require 'simple_form'
 require 'kaminari'
+require 'emoji'
 
 module MongoidForums
   class Engine < ::Rails::Engine

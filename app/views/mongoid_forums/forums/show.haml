@@ -30,7 +30,7 @@
             ⚠
           - if topic.pinned
             *
-          = link_to topic.name, topic
+          = link_to emojify(topic.name), topic
         %td
           = topic.user.forum_display_name
           = time_ago_in_words( topic.created_at )

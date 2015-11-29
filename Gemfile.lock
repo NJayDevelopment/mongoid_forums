@@ -4,6 +4,7 @@ PATH
     mongoid-forums (1.0.6)
       cancancan (~> 1.10)
       decorators (= 2.0.1)
+      gemoji (= 2.1.0)
       haml
       mongoid (= 5.0.0)
       rails (~> 4.2.0)
@@ -64,6 +65,7 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     erubis (2.7.0)
+    gemoji (2.1.0)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     haml (4.0.7)
