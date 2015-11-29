@@ -18,12 +18,12 @@ Gem::Specification.new do |s|
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency "rails", "~> 4.2.0"
-  s.add_dependency 'mongoid', "4.0.0"
+  s.add_dependency 'mongoid', "5.0.0"
   s.add_dependency 'simple_form'
   s.add_dependency 'kaminari', '0.15.1'
   s.add_dependency 'sanitize', '2.0.6'
   s.add_dependency 'cancancan', '~> 1.10'
-  s.add_dependency 'decorators', '1.0.2'
+  s.add_dependency 'decorators', '2.0.1'
   s.add_dependency "haml"
 
   s.add_development_dependency 'devise', '~> 3.4.0'
