@@ -23,6 +23,13 @@ Run the installer and answer any questions that pop up. There's sensible default
 rails g mongoid_forums:install
 ```
 
+Don't forget to add `require 'mongoid_forums'` in your config/application.rb file. 
+This is the relevant example from the dummy app: 
+
+https://github.com/NJayDevelopment/mongoid_forums/blob/master/test/dummy/config/application.rb#L13
+
+See here for relevant discussion as to why this require statement is necessary: https://github.com/bundler/bundler/issues/1041
+
 ## Set up helper methods in your user model
 
 MongoidForums depends on a `forum_display_name` (which defaults as `to_s`) method being available on your `User` model so that it can display the user's name in posts. Define it in your model like this:
