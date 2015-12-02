@@ -71,6 +71,7 @@ Here's a comprehensive list of the features currently in Mongoid Forumsf:
 * Text Formatting
   * Posts are HTML escaped and pre tagged by default.
   * Pluggable formatters for other behaviour
+  * :point_right: :tada: [:emoji:](http://www.emoji-cheat-sheet.com/) :tada: :point_left:
 * [A flexible permissions system](https://github.com/radar/forem/wiki/Authorization-System) (Works exactly as Forem does, using CanCanCan and allowing overrides)
 * [Translations](https://github.com/radar/forem/wiki/Translations) (Not complete, some messages currently are hardcoded in English)
 * [Flexible configuration](https://github.com/radar/forem/wiki/Configuration) (All features of Forem except avatars, profile links, and theme. We are working hard on adding these, but you can also add them to your own project if needed through the default method of overriding rails engine controllers, models, and views!)
@@ -116,7 +117,6 @@ end
 
 
 Planned Features:
-- [ ] [emoji](http://www.emoji-cheat-sheet.com/)
 - [ ] Mass moderation
 - [ ] Option to have to approve topics/posts manually
 - [ ] Block spammers feature
