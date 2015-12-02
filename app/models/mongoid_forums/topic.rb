@@ -21,6 +21,10 @@ module MongoidForums
     validates :name, :presence => true, :length => { maximum: 255 }
     validates :user, :presence => true
 
+    def emojified_name
+      ApplicationController.helpers.emojify(name)
+    end
+
     def can_be_replied_to?
       !locked?
     end

@@ -31,7 +31,7 @@
             - last_post = last_topic.posts.last
             = time_ago_in_words ( last_post.created_at )
             ago on
-            = link_to last_post.topic.name, last_post.topic
+            = link_to last_post.topic.emojified_name, last_post.topic
             by
             = last_post.user.forum_display_name
           - else

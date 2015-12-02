@@ -1,4 +1,4 @@
-%h1 Viewing Topic "#{@topic.name}"
+%h1 Viewing Topic "#{@topic.emojified_name}"
 - if mongoid_forums_admin?
   = link_to t("mongoid_forums.topics.actions.hide.#{@topic.hidden}"), toggle_hide_admin_topic_path(@forum, @topic), :class => "btn"
   = link_to t("mongoid_forums.topics.actions.lock.#{@topic.locked}"), toggle_lock_admin_topic_path(@forum, @topic), :class => "btn"

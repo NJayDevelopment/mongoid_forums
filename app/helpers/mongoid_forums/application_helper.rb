@@ -3,7 +3,7 @@ module MongoidForums
     include FormattingHelper
     # processes text with installed markup formatter
     def mongoid_forums_format(text, *options)
-      as_formatted_html(text)
+      emojify(as_formatted_html(text))
     end
 
     def mongoid_forums_quote(text)

@@ -24,6 +24,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'cancancan', '~> 1.10'
   s.add_dependency 'decorators', '2.0.1'
   s.add_dependency "haml"
+  s.add_dependency 'gemoji', '= 2.1.0'
 
   s.add_development_dependency 'devise', '~> 3.4.0'
   s.add_development_dependency "jquery-rails"
