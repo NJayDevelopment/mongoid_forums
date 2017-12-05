@@ -1,0 +1,196 @@
+zh-CN:
+  mongoid_forums:
+    general:
+      forum: 论坛
+      topics: 主题
+      topic: 主题
+      posts: 帖子
+      posts_count:
+        zero: 没有帖子
+        one: 一条帖子
+        other: "%{count} 帖子"
+      flagged_for_spam: 你的帐户已被标记为垃圾用户。
+      cannot_create_topic: 你现在无法创建新主题。
+      cannot_create_post: 你现在无法创建新帖子。
+
+    access_denied: "你没有足够的权限。"
+    admin:
+      area: 管理员区 
+      welcome: "欢迎来到mongoid_forum管理员区"
+      forum:
+        index: 管理论坛
+        new: 创建新论坛
+        new_link: 新论坛
+        deleted: 选中的论坛已被删除。
+        created: 论坛已被创建。
+        not_created: 无法创建论坛。
+        updated: 论坛已被更新。
+        not_updated: 无法更新论坛。
+      forums:
+        edit: 编辑
+        delete: 删除
+        category: 类别
+        delete_confirm: 你确定要删除这个论坛？
+        index:
+          last_post: 最后一个帖子
+          none: None
+      group:
+        index: 管理组
+        created: 成功创建组。
+        not_created: 无法创建组。
+        updated: 成功更新组。
+        not_updated: 无法更新组。
+        deleted: 选中的组已被删除。
+      groups:
+        show:
+          add_member: 添加
+      category:
+        index: 管理论坛类别
+        new: 管理一个新的论坛类别
+        new_link: 新论坛类别
+        deleted: 选中的论坛类别已被删除。
+        created: 论坛类别已被创建。
+        not_created: 这个论坛分类不能被创建。
+        updated: 这个论坛分类已被更新。
+        not_updated: 这个论坛类别不能被更新。
+      categories:
+        edit: 编辑
+        delete: 删除
+        category: 类别
+        delete_confirm: 你确定要删除这个论坛类别？
+    common:
+      pages: 页面
+    errors:
+      not_signed_in: 你必须要先登录。
+      access_denied: 拒绝访问
+    forum:
+      header: "察看 %{title}"
+      forums: 论坛
+      new: 创建一个新论坛
+      edit: "编辑 %{title} 论坛"
+      topics_count:
+        zero: 0 个主题
+        one: 1 个主题
+        other: "%{count} 个主题"
+      posts_count:
+        zero: 0 个帖子
+        one: 1 个帖子
+        other: "%{count} 个帖子"
+      moderator_tools: "仲裁工具"
+    forums:
+      index:
+        title: 论坛
+        forum: 论坛
+        views: 察看
+        last_post: '最后帖子:'
+        none: 没有
+    topic:
+      headings:
+        topic: 主题
+        latest: 最新
+        posts: 帖子
+        views: 察看
+      moderation:
+        success: 选中主题正在被仲裁。
+      reply: 回复
+      quote: 引用
+      delete: 删除
+      created: 这个主题已被创建。
+      new: 创建一个新主题
+      edit: 编辑主题
+      not_created: 不能创建这个主题。
+      deleted: 你的主题已被删除。
+      cannot_delete: 你不能删除别人的主题。
+      updated: 主题已被更新。
+      not_updated: 不能更新这个主题。
+      subscribed: 你已经订阅这个主题。
+      unsubscribed: 你已经取消订阅这个主题。
+      none: 在论坛中还没有主题。
+      links:
+        new: 新主题
+        back_to_topics: 返回主题列表
+        edit: 编辑主题
+      not_found: 找不到你要查找的主题。
+      hidden:
+        'true': 这个主题被隐藏。
+        'false': 这个主题可见。
+      locked:
+        'true': 这个主题被锁定。
+        'false': 这个主题被解锁。
+      pinned:
+        'true': 这个主题被固定。
+        'false': 这个主题被取消固定。
+    topics:
+      show:
+        reply: 回复
+        delete: 删除
+        subscribe: 订阅
+        unsubscribe: 取消订阅
+        reply_to_topic: 恢复主题
+        pending_review: 这个主题正在被审核。只有作者或仲裁人可以察看它。
+      actions:
+        hide:
+          'true': 显示这个主题
+          'false': 隐藏这个主题
+        lock:
+          'true': 解锁这个主题
+          'false': 锁定这个主题
+        pin:
+          'true': 解除固定这个主题
+          'false': 固定这个主题
+    post:
+      buttons:
+        reply: 发表回复
+        edit: 编辑
+      created: 你的回复已被发表。
+      new: 回复
+      edit: 编辑
+      not_created: 你的回复不能被发表。
+      not_created_topic_locked: 你不能回复被锁定的帖子。
+      not_created_quote_original_post: 你不能引用原始帖子。
+      edited: 你的帖子已经被编辑。
+      not_edited: 你的帖子不能被编辑。
+      deleted: 你的帖子已经被删除。
+      deleted_with_topic: 只有主题下的帖子被删除。主题也被删除。
+      cannot_delete: 你不能删除别人的帖子。
+      cannot_delete_first_post: 你不能删除这个主题的第一个帖子
+      in_reply_to: 回复给
+    posts:
+      moderation:
+        moderate: 审核
+        approve: 批准
+        success: 选择的帖子正在被审阅。
+      post:
+        pending_review: 这个帖子正在被审核，只有作者或仲裁人可以察看它。
+    moderation:
+      title: "%{forum} 的仲裁工具"
+  helpers:
+    submit:
+      forum:
+        create: 创建论坛
+        update: 更新论坛
+      topic:
+        create: 创建主题
+        update: 更新主题
+  simple_form:
+    labels:
+      forum:
+        title: 标题
+        description: 描述
+      topic:
+        subject: 主题
+        locked: 锁定
+        pinned: 固定
+        hidden: 隐藏
+        posts:
+          text: 文本
+      post:
+        text: 文本
+
+  # General stuff
+  time_ago_in_words: "%{time} 之前"
+  ago: " 之前"
+  ago_by: " 之前，发起人 "
+  by: by
+  started_by: "发起人 "
+  are_you_sure: 你确定？
